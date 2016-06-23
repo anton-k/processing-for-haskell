@@ -25,6 +25,3 @@ Guide
 Cool description that makes it clear how to create wonderful animations with the library.
 
 **TODO**
-
-
-
