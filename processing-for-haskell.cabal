@@ -69,6 +69,8 @@ library
     Graphics.Proc.Lib.Input.Time
 
     Graphics.Proc.Lib.Color
+
+    Graphics.Proc.Lib.Shape.Primitive2D
   
   -- LANGUAGE extensions used by modules in this package.
   other-extensions: DeriveFunctor, GeneralizedNewtypeDeriving
