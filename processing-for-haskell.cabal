@@ -63,6 +63,7 @@ library
 
     Graphics.Proc.Lib.Environment
 
+    Graphics.Proc.Lib.Input
     Graphics.Proc.Lib.Input.Mouse
     Graphics.Proc.Lib.Input.Keyboard
     Graphics.Proc.Lib.Input.Time
