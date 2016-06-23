@@ -1,7 +1,7 @@
 {-# Language DeriveFunctor, GeneralizedNewtypeDeriving #-}
 -- | The Processing IO-monad.
 module Graphics.Proc.Core.Pio(
-	Pio(..), runPio, InputState(..), GlobalState(..), defGlobalState,
+	Pio(..), runPio, readPio, InputState(..), GlobalState(..), defGlobalState,
 	MouseButton(..), Modifiers(..), Key(..), KeyState(..),
 
 	Seed, 
@@ -29,6 +29,11 @@ newtype Pio a = Pio { unPio :: StateT GlobalState IO a }
 
 runPio :: Pio a -> GlobalState -> IO (a, GlobalState)
 runPio (Pio x) st = runStateT x st
+
+readPio :: (InputState -> a) -> Pio a
+readPio selector = Pio $ do
+  st <- S.get  
+  return $ selector (globalInputState st)
 
 data GlobalState = GlobalState 
   { globalInputState    :: InputState

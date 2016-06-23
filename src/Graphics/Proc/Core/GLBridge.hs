@@ -2,7 +2,7 @@ module Graphics.Proc.Core.GLBridge(
 	MouseButton(..), Modifiers(..), Key(..), KeyState(..),
 	Col(..), 
   f2d, v2, p2v,
-	setupWindow
+	setupWindow, getWindowSize
 ) where
 
 import Graphics.Rendering.OpenGL hiding (scale, translate, rotate, rect, height, width)
@@ -45,6 +45,13 @@ projection2 xl xu yl yu = do
   where
     zl = -5
     zu = 5
+
+--------------------------------------------
+
+getWindowSize :: IO (Int, Int)
+getWindowSize = do
+  Size w h <- G.get windowSize 
+  return (fromEnum w, fromEnum h)
 
 --------------------------------------------
 -- converters

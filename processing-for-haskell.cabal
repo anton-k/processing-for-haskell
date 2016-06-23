@@ -60,6 +60,10 @@ library
 
     Graphics.Proc.Lib
     Graphics.Proc.Lib.Transform
+
+    Graphics.Proc.Lib.Environment
+
+    Graphics.Proc.Lib.Input.Mouse
   
   -- LANGUAGE extensions used by modules in this package.
   other-extensions: DeriveFunctor, GeneralizedNewtypeDeriving
