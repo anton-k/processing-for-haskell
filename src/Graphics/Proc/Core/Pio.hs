@@ -11,7 +11,6 @@ module Graphics.Proc.Core.Pio(
 
 import Data.Default
 import Data.Time.Clock
-import Data.Time.Calendar
 
 import Control.Monad.IO.Class
 import qualified System.Random as S
