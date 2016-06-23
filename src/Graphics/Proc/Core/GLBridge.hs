@@ -1,6 +1,7 @@
-module Graphics.Proc.GLBridge(
+module Graphics.Proc.Core.GLBridge(
 	MouseButton(..), Modifiers(..), Key(..), KeyState(..),
-	Col(..),
+	Col(..), 
+  f2d, v2, p2v,
 	setupWindow
 ) where
 
@@ -50,3 +51,5 @@ projection2 xl xu yl yu = do
 
 f2d = float2Double     
 
+v2 (x, y) = vertex $ Vertex3 (f2d x) (f2d y) 0
+p2v (x, y)= Vector3 (f2d x) (f2d y) 0

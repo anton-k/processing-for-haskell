@@ -1,7 +1,7 @@
 {-# Language DeriveFunctor, GeneralizedNewtypeDeriving #-}
 -- | The Processing IO-monad.
-module Graphics.Proc.Pio(
-	Pio, runPio, InputState(..), GlobalState(..), defGlobalState,
+module Graphics.Proc.Core.Pio(
+	Pio(..), runPio, InputState(..), GlobalState(..), defGlobalState,
 	MouseButton(..), Modifiers(..), Key(..), KeyState(..),
 
 	Seed, 
@@ -20,10 +20,12 @@ import System.Random hiding (random)
 import Control.Monad.Trans.State.Strict
 import qualified Control.Monad.Trans.State.Strict as S
 
-import Graphics.Proc.GLBridge
+import Graphics.Proc.Core.GLBridge
 
 newtype Pio a = Pio { unPio :: StateT GlobalState IO a }
   deriving (Functor, Applicative, Monad, MonadIO)
+
+
 
 runPio :: Pio a -> GlobalState -> IO (a, GlobalState)
 runPio (Pio x) st = runStateT x st

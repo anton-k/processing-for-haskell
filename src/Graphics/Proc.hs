@@ -16,6 +16,6 @@ import Data.Default
 import Control.Monad
 import Control.Applicative
 
-import Graphics.Proc.Pio
-import Graphics.Proc.Run
-import Graphics.Proc.GLBridge
+import Graphics.Proc.Core.Pio
+import Graphics.Proc.Core.Run
+import Graphics.Proc.Core.GLBridge

@@ -1,6 +1,6 @@
 {-# Language FlexibleContexts #-}
-module Graphics.Proc.Run(
-	Proc, runProc, TimeInterval
+module Graphics.Proc.Core.Run(
+	Proc, runProc, Draw, TimeInterval
 ) where
 
 import Control.Monad.IO.Class
@@ -14,8 +14,8 @@ import Graphics.UI.GLUT
 import Data.Time.Clock
 import Data.Time.Calendar
 
-import Graphics.Proc.Pio
-import Graphics.Proc.GLBridge
+import Graphics.Proc.Core.Pio
+import Graphics.Proc.Core.GLBridge
 
 type Update s = s -> Pio s
 type TimeInterval = Float

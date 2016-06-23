@@ -52,10 +52,14 @@ library
     Graphics.Proc         
   
   -- Modules included in this library but not exported.
-  other-modules:      
-    Graphics.Proc.Pio     
-    Graphics.Proc.Run
-    Graphics.Proc.GLBridge
+  other-modules:  
+    Graphics.Proc.Core
+    Graphics.Proc.Core.Pio     
+    Graphics.Proc.Core.Run
+    Graphics.Proc.Core.GLBridge
+
+    Graphics.Proc.Lib
+    Graphics.Proc.Lib.Transform
   
   -- LANGUAGE extensions used by modules in this package.
   other-extensions: DeriveFunctor, GeneralizedNewtypeDeriving
@@ -64,7 +68,8 @@ library
   build-depends:       
     base >=4.9 && <4.10, 
     data-default, transformers, random, time, hsnoise, 
-    OpenGL, GLUT
+    OpenGL, GLUT,
+    vector-space, NumInstances
   
   -- Directories containing source files.
   hs-source-dirs:      src
