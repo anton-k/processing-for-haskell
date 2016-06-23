@@ -1,6 +1,6 @@
 module Graphics.Proc.Core.GLBridge(
 	MouseButton(..), Modifiers(..), Key(..), KeyState(..),
-	Col(..), 
+	Col(..), glCol,
   f2d, v2, p2v,
 	setupWindow, getWindowSize
 ) where
@@ -15,6 +15,7 @@ import GHC.Float
 data Col = Col Float Float Float Float
     deriving (Show)
 
+glCol (Col r g b a) = Color4 r g b a
 
 -----------------------------------------
 -- init window

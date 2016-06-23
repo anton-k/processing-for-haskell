@@ -67,6 +67,8 @@ library
     Graphics.Proc.Lib.Input.Mouse
     Graphics.Proc.Lib.Input.Keyboard
     Graphics.Proc.Lib.Input.Time
+
+    Graphics.Proc.Lib.Color
   
   -- LANGUAGE extensions used by modules in this package.
   other-extensions: DeriveFunctor, GeneralizedNewtypeDeriving
