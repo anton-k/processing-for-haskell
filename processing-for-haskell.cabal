@@ -48,13 +48,14 @@ cabal-version:       >=1.10
 
 library
   -- Modules exported by the library.
-  exposed-modules:     
-    Graphics.Proc.Pio
+  exposed-modules:
+    Graphics.Proc         
   
   -- Modules included in this library but not exported.
-  other-modules:       
-    Graphics.Proc.GLBridge
+  other-modules:      
+    Graphics.Proc.Pio     
     Graphics.Proc.Run
+    Graphics.Proc.GLBridge
   
   -- LANGUAGE extensions used by modules in this package.
   other-extensions: DeriveFunctor, GeneralizedNewtypeDeriving

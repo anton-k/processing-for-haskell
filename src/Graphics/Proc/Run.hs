@@ -1,6 +1,6 @@
 {-# Language FlexibleContexts #-}
 module Graphics.Proc.Run(
-	Proc, TimeInterval
+	Proc, runProc, TimeInterval
 ) where
 
 import Control.Monad.IO.Class
@@ -16,8 +16,6 @@ import Data.Time.Calendar
 
 import Graphics.Proc.Pio
 import Graphics.Proc.GLBridge
-
-
 
 type Update s = s -> Pio s
 type TimeInterval = Float
@@ -156,5 +154,4 @@ runProc p = do
     writePosition ref pos = do
       inputSt <- G.get ref
       ref $=! inputSt { mousePosition = fromPosition pos }      
-
 
