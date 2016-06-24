@@ -22,7 +22,8 @@ module Graphics.Proc(
 	bezier,
 
 	-- ** Attributes
-	EllipseMode(..),
+	EllipseMode(..), ellipseMode,
+	strokeWeight,
 
 	-- bezier, 
 

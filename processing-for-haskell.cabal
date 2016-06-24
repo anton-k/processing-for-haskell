@@ -68,7 +68,8 @@ library
     Graphics.Proc.Lib.Control
 
     Graphics.Proc.Lib.Shape
-    Graphics.Proc.Lib.Shape.Primitive2D
+    Graphics.Proc.Lib.Shape.Primitive2D    
+    Graphics.Proc.Lib.Shape.Attribute
 
     Graphics.Proc.Lib.Input
     Graphics.Proc.Lib.Input.Mouse
