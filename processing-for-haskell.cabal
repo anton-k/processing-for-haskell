@@ -94,6 +94,7 @@ library
     Graphics.Proc.Lib.Typography
 
     Graphics.Proc.Lib.Math 
+    Graphics.Proc.Lib.Math.Random
 
   -- LANGUAGE extensions used by modules in this package.
   other-extensions: DeriveFunctor, GeneralizedNewtypeDeriving

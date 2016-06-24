@@ -6,7 +6,7 @@ module Graphics.Proc.Core.Pio(
 
 	Seed, 
 
-	EllipseMode(..)
+	EllipseMode(..), NoiseDetails(..)
 ) where
 
 import Data.Default

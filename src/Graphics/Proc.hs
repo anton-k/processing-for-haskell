@@ -125,6 +125,9 @@ module Graphics.Proc(
 	-- ** Trigonometry
 
 	-- ** Random
+	randomSeed, random, random2, randomP2, randomCol, 
+	NoiseDetails(..), noiseSeed, noise1, noise2, noise3,
+	randomGaussian,
 
 	-- | Useful standard functions
 	module Data.VectorSpace,
