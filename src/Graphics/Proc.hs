@@ -84,6 +84,10 @@ module Graphics.Proc(
 	-- * Lights
 	
 	-- * Camera
+
+	-- ** Coordinates
+
+    -- ** Material Properties  
 	
 	-- * Color		
     fill, noFill, stroke, noStroke, strokeFill,
@@ -92,9 +96,35 @@ module Graphics.Proc(
 
 	-- * Image	
 
+	-- ** Loading & Displaying
+
+	-- ** Textures
+
+	-- ** Pixels
+
+	-- ** Rendering
+
+	-- ** Shaders
+
 	-- * Typography
 
+	-- ** Loading & Displaying
+
+	-- ** Attributes
+	
+	-- ** Metrics
+
 	-- * Math
+
+	-- ** Operators
+	
+	-- ** Bitwise Operators
+	
+	-- ** Calculation
+
+	-- ** Trigonometry
+
+	-- ** Random
 
 	-- | Useful standard functions
 	module Data.VectorSpace,
