@@ -6,8 +6,6 @@ module Graphics.Proc(
 	-- * Types
 	Pio, Draw, Col(..), P2, P3,
 
-	EllipseMode(..),
-
 	-- * Environment
 
 	-- * Data
@@ -21,6 +19,10 @@ module Graphics.Proc(
 	triangle, rect, quad, ellipse, circle, line, linePath, point, pointPath, polygon,
 
 	-- ** Curves
+	bezier,
+
+	-- ** Attributes
+	EllipseMode(..),
 
 	-- bezier, 
 
