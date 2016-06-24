@@ -1,6 +1,10 @@
 module Graphics.Proc.Lib.Environment(
-	winSize, winWidth, winHeight
+	winSize, winWidth, winHeight,
+	size,
+	smooth, noSmooth
 ) where
+
+import Graphics.Rendering.OpenGL
 
 import Graphics.Proc.Core
 
@@ -11,4 +15,17 @@ winWidth, winHeight :: Pio Float
 
 winWidth  = liftIO $ fmap (fromIntegral . fst) getWindowSize
 winHeight = liftIO $ fmap (fromIntegral . snd) getWindowSize
+
+--------------------------------------------
+
+size :: P2 -> Pio ()
+size = liftIO . glSize
+
+--------------------------------------------
+
+smooth :: Pio ()
+smooth = liftIO $ pointSmooth $= Enabled
+
+noSmooth :: Pio ()
+noSmooth = liftIO $ pointSmooth $= Disabled
 

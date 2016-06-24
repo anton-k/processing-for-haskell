@@ -7,8 +7,22 @@ module Graphics.Proc(
 	Pio, Draw, Col(..), P2, P3,
 
 	-- * Environment
+	winSize, winWidth, winHeight,
+	size,
+	smooth, noSmooth,
 
 	-- * Data
+
+	-- ** Primitive
+
+	-- ** Composite
+
+	-- ** Conversion
+	float, int,
+	
+	-- ** String Functions
+
+	-- ** Array Functions
 	
 	-- * Control
 	

@@ -64,6 +64,7 @@ library
     Graphics.Proc.Lib.Environment
 
     Graphics.Proc.Lib.Data
+    Graphics.Proc.Lib.Data.Conversion
 
     Graphics.Proc.Lib.Control
 

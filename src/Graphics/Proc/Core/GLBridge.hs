@@ -2,7 +2,7 @@ module Graphics.Proc.Core.GLBridge(
 	MouseButton(..), Modifiers(..), Key(..), KeyState(..),
 	Col(..), glCol,
   f2d, v2, p2v,
-	setupWindow, getWindowSize
+	glSize, setupWindow, getWindowSize
 ) where
 
 import Graphics.Rendering.OpenGL hiding (scale, translate, rotate, rect, height, width)
@@ -28,10 +28,10 @@ setupWindow = do
   multisample $= Enabled
   blend $= Enabled
   blendFunc $= (SrcAlpha, OneMinusSrcAlpha)
-  size (100, 100)
+  glSize (100, 100)
 
-size :: MonadIO m => (Float, Float) -> m ()
-size p@(w, h) = liftIO $ do
+glSize :: (Float, Float) -> IO ()
+glSize p@(w, h) = do
   windowSize $= fromPoint p
   projection2 0 w h 0
   where
@@ -61,3 +61,5 @@ f2d = float2Double
 
 v2 (x, y) = vertex $ Vertex3 (f2d x) (f2d y) 0
 p2v (x, y)= Vector3 (f2d x) (f2d y) 0
+
+
