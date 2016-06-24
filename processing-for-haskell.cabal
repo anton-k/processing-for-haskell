@@ -58,6 +58,7 @@ library
     Graphics.Proc.Core.Pio     
     Graphics.Proc.Core.Run
     Graphics.Proc.Core.GLBridge
+    Graphics.Proc.Core.Vector
 
     Graphics.Proc.Lib
 

@@ -1,6 +1,6 @@
 {-# Language FlexibleContexts #-}
 module Graphics.Proc.Core.Run(
-	Proc, runProc, Draw, TimeInterval
+	Proc(..), runProc, Draw, TimeInterval
 ) where
 
 import Control.Monad.IO.Class

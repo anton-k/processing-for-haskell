@@ -94,6 +94,8 @@ module Graphics.Proc(
     rgb, rgba, grey, greya, 
 	background, clear,
 
+	white, black, green, blue, orange, yellow, red,
+
 	-- * Image	
 
 	-- ** Loading & Displaying

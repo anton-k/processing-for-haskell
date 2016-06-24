@@ -9,11 +9,16 @@ import Graphics.Rendering.OpenGL hiding (scale, translate, rotate, rect, height,
 import qualified Graphics.Rendering.OpenGL as G
 import Graphics.UI.GLUT hiding (scale, translate, rotate, rect, rgba)
 
+import Data.Default
 import Control.Monad.IO.Class
 import GHC.Float
 
 data Col = Col Float Float Float Float
     deriving (Show)
+
+instance Default Col where
+  def = black
+    where black = Col 0 0 0 1
 
 glCol (Col r g b a) = Color4 r g b a
 
