@@ -49,29 +49,48 @@ cabal-version:       >=1.10
 library
   -- Modules exported by the library.
   exposed-modules:
-    Graphics.Proc         
+    Graphics.Proc       
   
   -- Modules included in this library but not exported.
   other-modules:  
     Graphics.Proc.Core
+
     Graphics.Proc.Core.Pio     
     Graphics.Proc.Core.Run
     Graphics.Proc.Core.GLBridge
 
     Graphics.Proc.Lib
-    Graphics.Proc.Lib.Transform
 
     Graphics.Proc.Lib.Environment
+
+    Graphics.Proc.Lib.Data
+
+    Graphics.Proc.Lib.Control
+
+    Graphics.Proc.Lib.Shape
+    Graphics.Proc.Lib.Shape.Primitive2D
 
     Graphics.Proc.Lib.Input
     Graphics.Proc.Lib.Input.Mouse
     Graphics.Proc.Lib.Input.Keyboard
     Graphics.Proc.Lib.Input.Time
 
+    Graphics.Proc.Lib.Output
+
+    Graphics.Proc.Lib.Transform
+
+    Graphics.Proc.Lib.Lights
+
+    Graphics.Proc.Lib.Camera
+
     Graphics.Proc.Lib.Color
 
-    Graphics.Proc.Lib.Shape.Primitive2D
-  
+    Graphics.Proc.Lib.Image
+
+    Graphics.Proc.Lib.Typography
+
+    Graphics.Proc.Lib.Math 
+
   -- LANGUAGE extensions used by modules in this package.
   other-extensions: DeriveFunctor, GeneralizedNewtypeDeriving
   
