@@ -25,6 +25,11 @@ module Graphics.Proc(
 	-- ** Array Functions
 	
 	-- * Control
+
+	-- ** Relational Operators
+	-- ** Iteration
+	-- ** Conditionals
+	-- ** Logical Operators
 	
 	-- * Shape
 
@@ -35,11 +40,15 @@ module Graphics.Proc(
 	-- ** Curves
 	bezier,
 
+	-- ** 3D Primitives
+
 	-- ** Attributes
 	EllipseMode(..), ellipseMode,
 	strokeWeight,
 
-	-- bezier, 
+	-- ** Vertex
+
+	-- ** Loading & Displaying
 
 	-- * Input
 
