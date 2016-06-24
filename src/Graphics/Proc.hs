@@ -65,6 +65,13 @@ module Graphics.Proc(
 	year, month, day, hour, minute, second, millis,
 
 	-- * Output	
+
+	-- ** Text Area
+	println,
+
+	-- ** Image
+	
+	-- ** Files
 	
 	-- * Transform
 	translate, 

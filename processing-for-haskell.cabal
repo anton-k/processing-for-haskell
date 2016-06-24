@@ -79,6 +79,7 @@ library
     Graphics.Proc.Lib.Input.Time
 
     Graphics.Proc.Lib.Output
+    Graphics.Proc.Lib.Output.TextArea
 
     Graphics.Proc.Lib.Transform
 
