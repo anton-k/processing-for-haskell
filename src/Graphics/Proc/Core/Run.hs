@@ -83,6 +83,7 @@ runProc p = do
       loadIdentity
       updateState (\s -> procDraw p s >> return s) st globalStRef inputStRef         
       swapBuffers
+      updateFrameCount globalStRef
 
     idle st globalStRef inputStRef = do
       updateState (procUpdate p) st globalStRef inputStRef
@@ -117,7 +118,6 @@ runProc p = do
     saveMouseButton mb inputStRef = do
       inputSt <- G.get inputStRef
       inputStRef $= inputSt { pressedButton = mb }
-
 
     keyMouse st globalStRef inputStRef key keyState modifiers pos = do
       inputSt <- G.get inputStRef
@@ -155,3 +155,6 @@ runProc p = do
       inputSt <- G.get ref
       ref $=! inputSt { mousePosition = fromPosition pos }      
 
+    updateFrameCount globalStRef = do
+      globalSt <- G.get globalStRef
+      globalStRef $= globalSt { globalFrameCount = globalFrameCount globalSt + 1 }

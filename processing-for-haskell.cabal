@@ -97,12 +97,14 @@ library
     Graphics.Proc.Lib.Math 
     Graphics.Proc.Lib.Math.Random
 
+    Graphics.Proc.Lib.Misc
+
   -- LANGUAGE extensions used by modules in this package.
   other-extensions: DeriveFunctor, GeneralizedNewtypeDeriving
   
   -- Other library packages from which modules are imported.
   build-depends:       
-    base >=4.9 && <4.10, 
+    base >=4.7 && <7, 
     data-default, transformers, random, time, hsnoise, 
     OpenGL, GLUT,
     vector-space, NumInstances

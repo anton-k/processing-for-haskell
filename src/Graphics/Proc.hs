@@ -9,7 +9,7 @@ module Graphics.Proc(
 	-- * Environment
 	winSize, winWidth, winHeight,
 	size,
-	smooth, noSmooth,
+	smooth, noSmooth, frameCount,
 
 	-- * Data
 
@@ -131,13 +131,16 @@ module Graphics.Proc(
 	NoiseDetails(..), noiseSeed, noise1, noise2, noise3,
 	randomGaussian,
 
+	-- * Misc
+	onCircle, onLine, uon,
+
 	-- | Useful standard functions
 	module Data.VectorSpace,
     module Data.NumInstances,
 	module Data.Default,
 	module Data.Monoid,
 	module Control.Monad,
-	module Control.Applicative
+	module Control.Applicative	
 ) where
 
 import Data.Default

@@ -12,7 +12,8 @@ module Graphics.Proc.Lib(
 	module Graphics.Proc.Lib.Color,
 	module Graphics.Proc.Lib.Image,
 	module Graphics.Proc.Lib.Typography,
-	module Graphics.Proc.Lib.Math
+	module Graphics.Proc.Lib.Math,
+	module Graphics.Proc.Lib.Misc
 
 ) where
 
@@ -29,3 +30,4 @@ import Graphics.Proc.Lib.Color
 import Graphics.Proc.Lib.Image
 import Graphics.Proc.Lib.Typography
 import Graphics.Proc.Lib.Math
+import Graphics.Proc.Lib.Misc

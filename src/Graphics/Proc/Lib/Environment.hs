@@ -1,9 +1,11 @@
 module Graphics.Proc.Lib.Environment(
 	winSize, winWidth, winHeight,
 	size,
-	smooth, noSmooth
+	smooth, noSmooth, 
+    frameCount
 ) where
 
+import qualified Control.Monad.Trans.State.Strict as S
 import Graphics.Rendering.OpenGL
 
 import Graphics.Proc.Core
@@ -29,3 +31,7 @@ smooth = liftIO $ pointSmooth $= Enabled
 noSmooth :: Pio ()
 noSmooth = liftIO $ pointSmooth $= Disabled
 
+--------------------------------------------
+
+frameCount :: Pio Int
+frameCount = Pio $ fmap globalFrameCount S.get
