@@ -15,7 +15,7 @@ The project needs your help
 The Processing being a small language implements some  tons of
 magic with OpenGL  under the hood. There are really big implementations
 of graphics primitives. I can not finish this thing all alone.
-So of you are really interested in seeing the package finished.
+So if you are really interested in seeing the package finished.
 If you want all features of Processing be implemented please **do** contribute!
 
 
