@@ -1,0 +1,5 @@
+-- original code
+--
+-- https://processing.org/examples/redraw.html
+--
+-- `redraw` funtion is not implemented yet (todo).
