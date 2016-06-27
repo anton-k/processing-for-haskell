@@ -4,9 +4,9 @@ Processing for Haskell
 Computer Graphics for kids and artists! The library implements
 Processing language in Haskell.
 
-Welll, But actually it...
+Well, But actually it...
 
-... implemets a **subset** of Processing Language in Haskell. So ...
+... implements a **subset** of Processing Language in Haskell. So ...
 
 
 The project needs your help
@@ -15,7 +15,7 @@ The project needs your help
 The Processing being a small language implements some  tons of
 magic with OpenGL  under the hood. There are really big implementations
 of graphics primitives. I can not finish this thing all alone.
-So of you are really interested in seing the package finished.
+So of you are really interested in seeing the package finished.
 If you want all features of Processing be implemented please **do** contribute!
 
 
@@ -450,6 +450,10 @@ Let's briefly recall all the differences:
 	    p2 = (x2, y2)
 	line p1 p2
 	~~~
+
+	We can do all numerical operations with points and quite more. The points implementation
+	is based upon the package `vector-space`. See it on hackage
+	for complete API of points/vectors.
 
 * We use special functions to construct colors:
 
