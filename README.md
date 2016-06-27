@@ -188,13 +188,20 @@ Then we can define a block of constants:
 ~~~Haskell
 -- constants
 rad       = 55
-winWidth  = 300
-winHeight = 300
-centerX   = winWidth / 2
-centerY   = winHeight / 2
+width     = 300
+height    = 300
+centerX   = width / 2
+centerY   = height / 2
 ~~~
 
 The code is quite the same. No surprises here.
+There is a tiny difference in naming. I've renamed the `winWidth` to just `width`.
+In the processing width is a special name that returns the current width of the window.
+It's often used in the drawing to scale things. But with Haskell 
+I've decided to rename width to winWidth. So that we can use this name as a simple constant.
+It's rare case when we want to change the size of the window so it's much convenient
+to use as a pure constant. So the `winWidth` and `winHeight` are special functions
+in Haskell to read current width and height of the window.
 
 The next thing is to define a state and initialize it with setup.
 With Java it was a simple global variable definition. 
@@ -209,44 +216,45 @@ Our `setup` function is going to produce initial state value:
 ~~~Haaskell
 setup :: Pio Float
 setup = do
-	size (winWidth, winHeight)
+	size (width, height)
 	return 0
 ~~~
 
 With the first command (`size`) we set the sizes of the windows.
 With second command we return the value of our state. Later we are going
 to pass it as an argument to draw `function`. Notice the type signature of the function.
-The value is wrapped is `Pio`. The `Pio` is short for Processing IO-monad. 
+The value is wrapped in `Pio`. The `Pio` is short for Processing IO-monad. 
 That's familiar to Haskellers IO-monad that is augmented with Processing features
 (drawing primitives, noise generators, time queries and so on). 
 
 So the bottom line is that haskell `setup` function should produce a state
 wrapped in special case of IO-monad.
 
+
 Let's draw everything:
 
 ~~~Haskell
 draw :: Float -> Draw
 draw t = do
-	background (gray 255)
+	background (grey 255)
 	drawSun
 	drawPlanet t
 ~~~
 
-We do the same things we did in Java. but now we get the state as an argument
+We do the same things we did in Processing. but now we get the state as an argument
 and we pass it to the function `drawPlanet` that is going to need the state.
 Also notice that there is no state update. We are going to do it with the separate function.
 
 Notice the type `Draw`. It's just an alias for `Pio ()`.
 
 There is a slight difference in color handling. 
-The function `gray` constructs RGB-color out of single value. Why do we need that? 
+The function `grey` constructs RGB-color out of single value. Why do we need that? 
 In Processing like in Java we can define several functions with the same name. They are
 distinguished with type-signatures of the arguments. But Haskell is more restrictive. 
 We should have only one function with the given name. So Processing `background` function
-can take one or three arguments. If it has only one it constructs the gray color if it has three
+can take one or three arguments. If it has only one it constructs the grey color if it has three
 it uses them as red, green and blue parameters of the color. In Haskell we use the function
-`gray` to construct the gray colors and `rgb` to construct simple colors. 
+`grey` to construct the grey colors and `rgb` to construct simple colors. 
 Also there are functions `greya` and `rgba` they have another one argument for **a**lpha or transparency.
 
 Let's draw the sun and the planet:
@@ -259,9 +267,8 @@ drawSun = do
 
 The Sun is static so we don't need any input.
 Notice the difference of `ellipse` function. In Haskell I've decided to
-make the points are default. The Processing always uses a plain float values.
-It's ok for introduction but I often find that the point type (or representation with pairs of numbers)
-is much more convenient. 
+express arguments of all 2D functions with points or pairs of floats. The Processing always uses a plain float values.
+It's ok for introduction but I often find that the point type is much more convenient. 
 
 Let's draw a planet:
 
@@ -336,7 +343,7 @@ class Default a where
 
 So the `def` contains all callback we need. Then we can set the callbacks we need with our functions:
 
-~~~
+~~~Haskell
 def { procSetup  = setup
 	, procDraw   = draw
 	, procUpdate = update 
@@ -347,7 +354,7 @@ and pass this value to the `runProc` function.
 
 Here is the complete code for Haskell program:
 
-~~~
+~~~Haskell
 import Graphics.Proc
 
 main = runProc $ def 
@@ -390,6 +397,9 @@ drawPlanet t = do
 	where	
 		p = center + rad *^ (cos t, sin t)	
 ~~~
+You can save the file and run it with runhaskell utility.
+
+### Recap
 
 The code is almost the same as Processing code but there are differences.
 Let's briefly recall all the differences:
@@ -454,4 +464,19 @@ Let's briefly recall all the differences:
 	background 	:: Col -> Draw
 	~~~
 
-**TODO**
+That's enough to start coding something interesting! For the  next tips
+you can read the reference of Processing language. The structure of the `Graphics.Proc`
+module is the same as in the reference document. I've tried to be as close  to original definitions as possible
+so I hope that you can easily grasp the meaning of the Haskell function by reading the original
+Processing documentation. 
+
+You can find that many functions are already implemented. But some are not. 
+The processing-for-haskell is far from completion, but still you  can write some cool graphics with it. 
+Hope you enjoy it. You can read and execute the examples (see the directory  in the source code `examples`).
+
+### Differences with Processing
+
+* In Processing we can write animation and accumulate the pictures 
+	on the screen if we not redraw it with background. In Haskell
+	right now we can only use animation mode. The accumulation 
+	of pictures is not reliable.
