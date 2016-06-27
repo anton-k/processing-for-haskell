@@ -1,8 +1,9 @@
 Processing for Haskell
 =============================================
 
-Computer Graphics for kids and artists! The library implements
-Processing language in Haskell.
+Computer Graphics for kids and artists! 
+It's an imperative EDSL for computer graphics. It's very easy to use. 
+The library implements Processing language in Haskell. 
 
 Well, But actually it...
 
@@ -213,7 +214,7 @@ state manipulation but we are going to do it going functional way.
 
 Our `setup` function is going to produce initial state value:
 
-~~~Haaskell
+~~~Haskell
 setup :: Pio Float
 setup = do
 	size (width, height)
@@ -222,7 +223,7 @@ setup = do
 
 With the first command (`size`) we set the sizes of the windows.
 With second command we return the value of our state. Later we are going
-to pass it as an argument to draw `function`. Notice the type signature of the function.
+to pass it as an argument to `draw` function. Notice the type signature of the function.
 The value is wrapped in `Pio`. The `Pio` is short for Processing IO-monad. 
 That's familiar to Haskellers IO-monad that is augmented with Processing features
 (drawing primitives, noise generators, time queries and so on). 
@@ -300,7 +301,7 @@ drawPlanet t = do
 
 The operator `*^` multiplies both values o the pair with the given value.
 So it multiplies a float value by point or scales the point with the value.
-The `+` and numeric literals are `overloaded` for points. We can some them up
+The `+` and numeric literals are *overloaded* for points. We can sum them up
 and a numeric value `12` produces a pair of `(12, 12)`. So the formula becomes
 a single line definition:
 
@@ -315,7 +316,7 @@ update :: Float -> Pio Float
 update t = return (t + 0.025)
 ~~~
 
-It's much the same thing we did, but now the state is explicitly stated in 
+It's much the same thing we did, but now the state update is written explicitly in 
 the type signature of the function.
 
 So we can set the things in motion! But the Haskell language knows nothing about
@@ -339,6 +340,9 @@ This class has only one method:
 ~~~Haskell
 class Default a where
 	def = a
+
+instance Default st => Default (Proc st) where
+	def = Proc { ... }
 ~~~
 
 So the `def` contains all callback we need. Then we can set the callbacks we need with our functions:
@@ -402,7 +406,7 @@ You can save the file and run it with runhaskell utility.
 ### Recap
 
 The code is almost the same as Processing code but there are differences.
-Let's briefly recall all the differences:
+Let's briefly recall all of them:
 
 * In Processing we can use global variables to update the state.
 	In Haskell we explicitly pass the state and update it. 
@@ -476,11 +480,23 @@ Processing documentation.
 
 You can find that many functions are already implemented. But some are not. 
 The processing-for-haskell is far from completion, but still you  can write some cool graphics with it. 
-Hope you enjoy it. You can read and execute the examples (see the directory  in the source code `examples`).
+Hope you enjoy it. You can read and execute the examples (see the directory `examples` in the source code).
 
-### Differences with Processing
+### Surprises for seasoned processingers
 
 * In Processing we can write animation and accumulate the pictures 
 	on the screen if we not redraw it with background. In Haskell
 	right now we can only use animation mode. The accumulation 
 	of pictures is not reliable.
+
+	We  can emulate the desired behavior by accumulating state.
+	We can create a list of objects to draw and re-render all of them 
+	on each step.
+
+* In Haskell library the `draw` is split to two functions. One for drawing (`procDraw`) 
+	and another one fro state update (`procUpdate`).
+
+* `strokeWidth` is not yet implemented properly. 
+	So it's better to use circles in place of big points
+	and rectangles or quads in place of weighty lines.
+
