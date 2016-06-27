@@ -42,12 +42,13 @@ data GlobalState = GlobalState
   , globalFill          :: Maybe Col
   , globalStroke        :: Maybe Col   
   , globalEllipseMode   :: EllipseMode
+  , globalFrameCount    :: Int
   , globalLastTime      :: UTCTime
-  , globalStartTime     :: UTCTime
+  , globalStartTime     :: UTCTime  
   }
 
 defGlobalState :: InputState -> IO GlobalState
-defGlobalState inputSt = fmap (\x -> GlobalState inputSt Nothing Nothing def def def def x x) getCurrentTime
+defGlobalState inputSt = fmap (\x -> GlobalState inputSt Nothing Nothing def def def def 0 x x) getCurrentTime
 
 ------------------------------------------------
 -- input state
