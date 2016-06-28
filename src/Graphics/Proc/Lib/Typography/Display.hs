@@ -22,7 +22,7 @@ text str p = do
 					translate p
 					local $ do
 						scale (fontSizeFactor fontSpec *^ (1, -1))					
-						liftIO $ renderFont (fontCurrent fontSpec) (encodeString str) Side
+						liftIO $ renderFont (fontCurrent fontSpec) (encodeString str) Side                        
 
 fontSizeFactor fontSpec = fromIntegral (fontSize fontSpec) / fromIntegral (fontInitSize fontSpec)
 

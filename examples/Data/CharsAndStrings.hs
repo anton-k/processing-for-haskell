@@ -14,16 +14,9 @@
 
 -- The String datatype must be capitalized because it is a complex datatype. 
 -- A String is actually a class with its own methods, some of which are featured below.
-
-{-# LANGUAGE OverloadedStrings #-}
 import Graphics.Proc
 
 import Prelude hiding (words)
-import qualified Data.Text.Encoding as T
-import Graphics.Rendering.FTGL as FTGL
-import Codec.Binary.UTF8.String
-import Data.String hiding  (words)
-import Data.ByteString.Char8 hiding  (words, length)
 
 main = runProc $ def { procSetup = setup, procDraw = draw, procKeyReleased = keyPressed }
 
@@ -35,7 +28,7 @@ wordsInit = "Begin..."
 
 setup = do    
   size (width, height)
-  font <- loadFont ("D:\\tools\\ubuntu-font-family\\Ubuntu-R.ttf")
+  font <- loadFont "FreeSans.ttf"
   textFont font 36
   return wordsInit
 
@@ -51,21 +44,9 @@ draw words = do
   textSize 28
   text (unpack $ T.encodeUtf8 $ fromString words) (50, 120) -- , 540, 300);
 
+-- keyTyped leads to SegFault. Need to investigate
 keyPressed words = do
   k <- key
   return $ case k of
     Char ch -> words ++ [ch]
     _       -> words
-
-{-
-void keyTyped() {
-  // The variable "key" always contains the value 
-  // of the most recent key pressed.
-  if ((key >= 'A' && key <= 'z') || key == ' ') {
-    letter = key;
-    words = words + key;
-    // Write the letter to the console
-    println(key);
-  }
-}
--}
