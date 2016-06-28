@@ -93,6 +93,9 @@ library
     Graphics.Proc.Lib.Image
 
     Graphics.Proc.Lib.Typography
+    Graphics.Proc.Lib.Typography.Display
+    Graphics.Proc.Lib.Typography.Attributes
+    Graphics.Proc.Lib.Typography.Metrics
 
     Graphics.Proc.Lib.Math 
     Graphics.Proc.Lib.Math.Random
@@ -106,7 +109,7 @@ library
   build-depends:       
     base >=4.7 && <7, 
     data-default, transformers, random, time, hsnoise, 
-    OpenGL, GLUT,
+    OpenGL, GLUT, FTGL, utf8-string,
     vector-space, NumInstances
   
   -- Directories containing source files.

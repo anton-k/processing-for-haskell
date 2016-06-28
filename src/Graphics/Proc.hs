@@ -57,7 +57,7 @@ module Graphics.Proc(
 	relMouse, relMouseX, relMouseY,
 
 	-- ** Keyboard
-	key, modifiers,
+	Key(..), key, Modifiers(..), modifiers, 
 
 	-- ** Files
 
@@ -111,8 +111,10 @@ module Graphics.Proc(
 	-- * Typography
 
 	-- ** Loading & Displaying
+	Font, loadFont, text, textFont,
 
 	-- ** Attributes
+	textSize,
 	
 	-- ** Metrics
 

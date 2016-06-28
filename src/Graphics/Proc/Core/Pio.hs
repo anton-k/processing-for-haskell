@@ -1,9 +1,11 @@
 {-# Language DeriveFunctor, GeneralizedNewtypeDeriving #-}
 -- | The Processing IO-monad.
 module Graphics.Proc.Core.Pio(
-	Pio(..), runPio, readPio, InputState(..), GlobalState(..), defGlobalState,
+	Pio(..), runPio, readPio, readStatePio, modifyStatePio, 
+  InputState(..), GlobalState(..), defGlobalState,
 	MouseButton(..), Modifiers(..), Key(..), KeyState(..),
-
+  FontSpec(..),
+  
 	Seed, 
 
 	EllipseMode(..), NoiseDetails(..)
@@ -24,15 +26,21 @@ import Graphics.Proc.Core.GLBridge
 newtype Pio a = Pio { unPio :: StateT GlobalState IO a }
   deriving (Functor, Applicative, Monad, MonadIO)
 
-
-
 runPio :: Pio a -> GlobalState -> IO (a, GlobalState)
 runPio (Pio x) st = runStateT x st
 
 readPio :: (InputState -> a) -> Pio a
-readPio selector = Pio $ do
+readPio selector = readStatePio (selector . globalInputState)
+
+readStatePio :: (GlobalState -> a) -> Pio a
+readStatePio selector = Pio $ do
   st <- S.get  
-  return $ selector (globalInputState st)
+  return $ selector st
+
+modifyStatePio :: (GlobalState -> GlobalState) -> Pio ()
+modifyStatePio update = Pio $ do
+  st <- S.get
+  S.put $ update st
 
 data GlobalState = GlobalState 
   { globalInputState    :: InputState
@@ -42,13 +50,14 @@ data GlobalState = GlobalState
   , globalFill          :: Maybe Col
   , globalStroke        :: Maybe Col   
   , globalEllipseMode   :: EllipseMode
+  , globalFont          :: Maybe FontSpec
   , globalFrameCount    :: Int
   , globalLastTime      :: UTCTime
   , globalStartTime     :: UTCTime  
   }
 
 defGlobalState :: InputState -> IO GlobalState
-defGlobalState inputSt = fmap (\x -> GlobalState inputSt Nothing Nothing def def def def 0 x x) getCurrentTime
+defGlobalState inputSt = fmap (\x -> GlobalState inputSt Nothing Nothing def def def def def 0 x x) getCurrentTime
 
 ------------------------------------------------
 -- input state
@@ -92,3 +101,13 @@ data EllipseMode = Radius | Center | Corner | Corners
 
 instance Default EllipseMode where
   def = Center
+
+--------------------------------------------
+-- fonts
+
+data FontSpec = FontSpec 
+  { fontCurrent   :: Font
+  , fontInitSize  :: Int
+  , fontSize      :: Int
+  }
+
