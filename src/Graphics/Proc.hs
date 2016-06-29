@@ -125,8 +125,10 @@ module Graphics.Proc(
 	-- ** Bitwise Operators
 	
 	-- ** Calculation
+	remap, FloatInterval,
 
 	-- ** Trigonometry
+	radians, degrees, e, erad,
 
 	-- ** Random
 	randomSeed, random, random2, randomP2, randomCol, 

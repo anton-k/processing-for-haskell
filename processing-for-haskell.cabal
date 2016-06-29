@@ -99,6 +99,8 @@ library
     Graphics.Proc.Lib.Typography.Metrics
 
     Graphics.Proc.Lib.Math 
+    Graphics.Proc.Lib.Math.Calculation
+    Graphics.Proc.Lib.Math.Trigonometry
     Graphics.Proc.Lib.Math.Random
 
     Graphics.Proc.Lib.Misc
