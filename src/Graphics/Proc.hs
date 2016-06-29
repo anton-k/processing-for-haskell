@@ -141,6 +141,8 @@ module Graphics.Proc(
 
 	-- | Useful standard functions
 	module Data.VectorSpace,
+	module Data.AffineSpace,
+	module Data.Cross,	
     module Data.NumInstances,
 	module Data.Default,
 	module Data.Monoid,
@@ -152,8 +154,12 @@ import Data.Default
 import Control.Monad
 import Control.Applicative
 import Data.Monoid
+
 import Data.VectorSpace hiding (Sum(..))
 import Data.NumInstances
+import Data.AffineSpace
+import Data.Cross
+
 
 import Graphics.Proc.Core
 import Graphics.Proc.Lib
