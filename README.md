@@ -550,3 +550,9 @@ Hope you enjoy it. You can read and execute the examples (see the directory `exa
 	So it's better to use circles in place of big points
 	and rectangles or quads in place of weighty lines.
 
+* The angle for `rotate` function is measured in TAUs. 
+  It's modern way to measure rotation which is much more
+  convenient then traditional degrees or radians. 
+  The TAU is a ratio of full circle. So the interval is `[0, 1]`.
+  For example 90 degrees is 0.25, 180 degrees is 0.5.
+
