@@ -55,7 +55,8 @@ library
   other-modules:  
     Graphics.Proc.Core
 
-    Graphics.Proc.Core.Pio     
+    Graphics.Proc.Core.Pio 
+    Graphics.Proc.Core.PioRef    
     Graphics.Proc.Core.Run
     Graphics.Proc.Core.GLBridge
     Graphics.Proc.Core.Vector

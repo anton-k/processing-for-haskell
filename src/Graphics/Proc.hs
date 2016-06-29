@@ -136,6 +136,9 @@ module Graphics.Proc(
 	-- * Misc
 	onCircle, onLine, uon,
 
+	-- * Pio mutable values
+	PioRef, newPioRef, readPioRef, writePioRef, modifyPioRef,
+
 	-- | Useful standard functions
 	module Data.VectorSpace,
     module Data.NumInstances,

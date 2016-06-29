@@ -41,9 +41,9 @@ data Proc s = Proc
     , procKeyTyped     :: Update s
     }
 
-instance Default s => Default (Proc s) where
+instance Default (Proc s) where
     def = Proc
-        { procSetup = return def
+        { procSetup = return $ error "No setup is defined. Plese define the procSetup value."
         , procUpdate = return
         , procUpdateTime = const return
         , procDraw = const (return ()) 
