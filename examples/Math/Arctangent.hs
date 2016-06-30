@@ -24,7 +24,7 @@ setup = do
   	e1 = Eye (250, 16)  120 0
 	e2 = Eye (164, 185) 80  0
 	e3 = Eye (420, 230) 220 0
-
+	
 draw eyes = do
 	background (grey 102)
 	mapM_ drawEye eyes
