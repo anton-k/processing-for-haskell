@@ -111,10 +111,10 @@ module Graphics.Proc(
 	-- * Typography
 
 	-- ** Loading & Displaying
-	Font, loadFont, text, textFont,
+	-- Font, loadFont, text, textFont,
 
 	-- ** Attributes
-	textSize,
+	-- textSize,
 	
 	-- ** Metrics
 

@@ -1,5 +1,6 @@
 module Graphics.Proc.Core.GLBridge(
-	MouseButton(..), Modifiers(..), Key(..), KeyState(..), Font,
+	MouseButton(..), Modifiers(..), Key(..), KeyState(..), 
+  -- Font,
 	Col(..), glCol,
   f2d, v2, p2v,
 	glSize, setupWindow, getWindowSize  
@@ -8,7 +9,7 @@ module Graphics.Proc.Core.GLBridge(
 import Graphics.Rendering.OpenGL hiding (scale, translate, rotate, rect, height, width)
 import qualified Graphics.Rendering.OpenGL as G
 import Graphics.UI.GLUT hiding (scale, translate, rotate, rect, rgba, Font)
-import Graphics.Rendering.FTGL
+-- import Graphics.Rendering.FTGL
 
 import Data.Default
 import Control.Monad.IO.Class

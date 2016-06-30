@@ -111,3 +111,4 @@ data FontSpec = FontSpec
   , fontSize      :: Int
   }
 
+type Font = String

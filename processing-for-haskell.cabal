@@ -112,7 +112,9 @@ library
   build-depends:       
     base >=4.7 && <7, 
     data-default, transformers, random, time, hsnoise, 
-    OpenGL, GLUT, FTGL, utf8-string,
+    OpenGL, GLUT, 
+    -- FTGL, 
+    utf8-string,
     vector-space, NumInstances
   
   -- Directories containing source files.

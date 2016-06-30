@@ -1,8 +1,11 @@
 module Graphics.Proc.Lib.Typography.Display(
+{-
 	loadFont, text, textFont,
 	getCurrentFont, onFont, setFontSize
+-}
 ) where
 
+{-
 import Graphics.Rendering.FTGL
 import Codec.Binary.UTF8.String
 
@@ -51,3 +54,4 @@ setFontSize fontSpec size = modifyStatePio $ \st ->
     	let font = globalFont st
             font' = fmap (\x -> x { fontSize = size }) font
         in  st { globalFont = font' }
+-}
