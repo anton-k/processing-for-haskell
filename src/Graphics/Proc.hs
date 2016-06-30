@@ -126,6 +126,7 @@ module Graphics.Proc(
 	
 	-- ** Calculation
 	remap, FloatInterval,
+	constrain, constrain2,
 
 	-- ** Trigonometry
 	radians, degrees, e, erad,
