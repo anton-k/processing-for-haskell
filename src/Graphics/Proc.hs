@@ -62,7 +62,7 @@ module Graphics.Proc(
 	-- ** Files
 
 	-- ** Time & Date
-	year, month, day, hour, minute, second, millis,
+	year, month, day, hour, minute, second, millis, utcHour,
 
 	-- * Output	
 

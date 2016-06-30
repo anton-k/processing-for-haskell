@@ -1,13 +1,15 @@
 module Graphics.Proc.Lib.Input.Time(
-	year, month, day, hour, minute, second, millis	
+	year, month, day, utcHour, hour, minute, second, millis	
 ) where
 
 import Control.Monad.Trans.State.Strict
 import Data.Time.Clock
+import Data.Time.LocalTime
 import Data.Time.Calendar
 
 import Graphics.Proc.Core
 
+import Data.Fixed
 
 date :: IO (Integer,Int,Int) -- :: (year,month,day)
 date = getCurrentTime >>= return . toGregorian . utctDay
@@ -21,20 +23,27 @@ month = liftIO $ fmap (\(_, m, _) -> m) date
 day :: Pio Int
 day = liftIO $ fmap (\(_, _, d) -> d) date
 
-getTime = liftIO $ fmap (\(UTCTime _ time) -> time) getCurrentTime
+-- getTime = liftIO $ fmap (\(UTCTime _ time) -> time) getCurrentTime
+getTime = liftIO $ do
+  fmap (localTimeOfDay  . zonedTimeToLocalTime) getZonedTime  
+
+getUtcTime = liftIO $ fmap utctDayTime getCurrentTime
+
+utcHour :: Pio Int
+utcHour = fmap toHour getUtcTime
+  where
+    toHour x = (floor x) `div` (60 * 60)  
 
 hour :: Pio Int
-hour = fmap toHour getTime
-  where
-    toHour x = (floor x) `div` (60 * 60)
+hour = fmap todHour getTime
 
 minute :: Pio Int
-minute = fmap toMinute getTime
-  where
-    toMinute x = (floor x `div` 60) `mod` 60
+minute = fmap todMin getTime
+  -- where
+  --   toMinute x = (floor x `div` 60) `mod` 60
 
 second :: Pio Int
-second = fmap toSecond getTime
+second = liftIO $ fmap toSecond $ getCurrentTime >>= return . fromRational . toRational . utctDayTime
   where 
     toSecond x = (floor x) `mod` 60
 
