@@ -10,6 +10,7 @@ module Graphics.Proc(
 	winSize, winWidth, winHeight,
 	size,
 	smooth, noSmooth, frameCount, frameRate,
+	loop, noLoop, redraw,
 
 	-- * Data
 

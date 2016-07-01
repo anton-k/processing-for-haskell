@@ -94,14 +94,20 @@ runProc p = do
       updateFrameCount
       return s
 
-    idle ref = do
-      updateSt ref $ \s -> do      
+    idle ref = do 
+      loopInfo <- getLoopInfo ref
+      case loopInfo of
+        Loop   -> updateLoopState ref      
+        NoLoop -> return ()
+        Redraw -> updateLoopState ref >> passSt ref (putLoopMode NoLoop)
+      nextFrame ref
+
+    updateLoopState ref =  updateSt ref $ \s -> do      
         s1 <- procUpdate p s
         dt <- getDuration
         s2 <- procUpdateTime p dt s1
         liftIO $ postRedisplay Nothing
         return s2
-      nextFrame ref
 
     nextFrame ref = do
       timeOut <- getTimeoutInterval ref
@@ -129,7 +135,12 @@ runProc p = do
     mouseMotion ref pos = passSt ref $ putPosition pos
     passiveMouseMotion ref pos = passSt ref $ putPosition pos
 
-getTimeoutInterval ref = do
+getTimeoutInterval ref = readRef getter ref
+  where getter = fmap (round . (1000 * ) . recip) getFrameRate
+
+getLoopInfo ref = readRef getLoopMode ref
+
+readRef getter ref = do
   st <- fmap stGlobal $ get ref
   fmap fst $ runPio getter st
-  where getter = fmap (round . (1000 * ) . recip) getFrameRate
+

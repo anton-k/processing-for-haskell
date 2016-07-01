@@ -2,7 +2,8 @@ module Graphics.Proc.Lib.Environment(
 	winSize, winWidth, winHeight,
 	size,
 	smooth, noSmooth, 
-    frameCount, frameRate
+    frameCount, frameRate,
+    redraw, loop, noLoop
 ) where
 
 import qualified Control.Monad.Trans.State.Strict as S
@@ -20,12 +21,12 @@ winHeight = liftIO $ fmap (fromIntegral . snd) getWindowSize
 
 --------------------------------------------
 
-size :: P2 -> Pio ()
+size :: P2 -> Draw
 size = liftIO . glSize
 
 --------------------------------------------
 
-smooth :: Pio ()
+smooth :: Draw
 smooth = liftIO $ pointSmooth $= Enabled
 
 noSmooth :: Pio ()
@@ -33,3 +34,12 @@ noSmooth = liftIO $ pointSmooth $= Disabled
 
 frameRate :: Float -> Pio ()
 frameRate = putFrameRate
+
+redraw :: Draw
+redraw = putLoopMode Redraw
+
+loop :: Draw
+loop = putLoopMode Loop
+
+noLoop :: Draw
+noLoop = putLoopMode NoLoop
