@@ -2,7 +2,7 @@ module Graphics.Proc.Lib.Environment(
 	winSize, winWidth, winHeight,
 	size,
 	smooth, noSmooth, 
-    frameCount
+    frameCount, frameRate
 ) where
 
 import qualified Control.Monad.Trans.State.Strict as S
@@ -31,3 +31,5 @@ smooth = liftIO $ pointSmooth $= Enabled
 noSmooth :: Pio ()
 noSmooth = liftIO $ pointSmooth $= Disabled
 
+frameRate :: Float -> Pio ()
+frameRate = putFrameRate

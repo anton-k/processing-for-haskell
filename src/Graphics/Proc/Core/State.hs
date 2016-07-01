@@ -24,7 +24,7 @@ module Graphics.Proc.Core.State(
 	-- * Font
 
 	-- * Frame
-	LoopMode(..), updateFrameCount, frameCount,
+	LoopMode(..), updateFrameCount, frameCount, getFrameRate, putFrameRate,
 
 	-- * Time
 	initTimeState, TimeInterval, getDuration, getStartTime
@@ -113,6 +113,12 @@ updateFrameCount = onFrame E.updateFrameCount
 
 frameCount :: Pio Int
 frameCount = onFrame $ fmap E.frameCount get
+
+getFrameRate :: Pio Float
+getFrameRate = onFrame $ fmap E.frameRate get
+
+putFrameRate :: Float -> Pio ()
+putFrameRate value = onFrame $ modify $ \x -> x { frameRate = value }
 
 ----------------------------------------
 -- time

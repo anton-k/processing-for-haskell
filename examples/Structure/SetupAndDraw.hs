@@ -15,10 +15,8 @@ height = 360
 setup = do
   size (width, height)
   stroke (grey 255)
+  frameRate 30
   return 100
-  -- not implemented yet (todo) 
-  -- frameRate(30)
-
 
 -- The statements in draw() are executed until the 
 -- program is stopped. Each statement is executed in 
@@ -30,7 +28,7 @@ draw y = do
  
 update y
 	| y < 0     = return height
-	| otherwise = return (y - 0.01)
+	| otherwise = return (y - 1)
 
 ------------------------------------------------
 -- Notice that in haskell we use two separate functions to

@@ -1,3 +1,5 @@
+-- original code: https://processing.org/examples/sinecosine.html 
+
 -- Sine Cosine.
 -- 
 -- Linear movement with sin() and cos(). Numbers between 0 and PI*2 (TWO_PI which angles roughly 6.28) 
@@ -41,4 +43,4 @@ draw (angle1, angle2) = do
     (x2, y2) = center + scalar *^ (er ang2)
 
 update :: P2 -> Pio P2
-update angles = return $ angles + (0.15 *^ (2, 3))
+update angles = return $ angles + (2, 3)

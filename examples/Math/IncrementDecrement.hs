@@ -15,7 +15,7 @@ setup = do
   size (width, height)
   -- not implemented
   -- colorMode(RGB, width)
-  -- frameRate 30
+  frameRate 30
   return (a, b, direction)
   where
     a = 0
@@ -24,7 +24,7 @@ setup = do
 
 stroke' n = stroke (grey $ 255 * n / width)
 
-draw (a, b, direction) = do
+draw (a, b, direction) = do  
   if direction 
     then stroke' a
     else stroke' (width - a)
@@ -37,6 +37,6 @@ draw (a, b, direction) = do
 
 update (a, b, direction) = return (a1, b1, direction1)
   where
-    a1 = if (a > width) then 0 else a + 0.025
-    b1 = if (b < 0)     then width else b - 0.025
+    a1 = if (a > width) then 0 else a + 1
+    b1 = if (b < 0)     then width else b - 1
     direction1 = if (a > width) then not direction else direction 

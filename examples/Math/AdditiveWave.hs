@@ -24,7 +24,7 @@ theta = 0.0
 
 setup = do
   size (width, height)
-  --frameRate 30
+  frameRate 30
   -- colorMode(RGB, 255, 255, 255, 100)
   (amplitudes, periods) <- fmap unzip $ forM [0 .. maxwaves] $ \i -> do
     amplitude <- random2 (10, 30)

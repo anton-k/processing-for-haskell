@@ -77,10 +77,10 @@ passSt ref p = updateSt ref $ \s -> p >> return s
 runProc :: Proc s -> IO ()
 runProc p = do
   setupWindow
-  ref <- newIORef =<< initSt p   
+  ref <- newIORef =<< initSt p
 
-  displayCallback       $= display ref
-  idleCallback          $= Just (idle ref)
+  nextFrame ref
+  displayCallback       $= display ref  
   keyboardMouseCallback $= Just (keyMouse ref)
   motionCallback        $= Just (mouseMotion ref)
   passiveMotionCallback $= Just (passiveMouseMotion ref)
@@ -94,12 +94,18 @@ runProc p = do
       updateFrameCount
       return s
 
-    idle ref = updateSt ref $ \s -> do
-      s1 <- procUpdate p s
-      dt <- getDuration
-      s2 <- procUpdateTime p dt s1
-      liftIO $ postRedisplay Nothing
-      return s2
+    idle ref = do
+      updateSt ref $ \s -> do      
+        s1 <- procUpdate p s
+        dt <- getDuration
+        s2 <- procUpdateTime p dt s1
+        liftIO $ postRedisplay Nothing
+        return s2
+      nextFrame ref
+
+    nextFrame ref = do
+      timeOut <- getTimeoutInterval ref
+      addTimerCallback timeOut (idle ref)
 
     keyMouse ref key keyState modifiers pos = updateSt ref $ \s -> do
       putPosition pos
@@ -122,3 +128,8 @@ runProc p = do
 
     mouseMotion ref pos = passSt ref $ putPosition pos
     passiveMouseMotion ref pos = passSt ref $ putPosition pos
+
+getTimeoutInterval ref = do
+  st <- fmap stGlobal $ get ref
+  fmap fst $ runPio getter st
+  where getter = fmap (round . (1000 * ) . recip) getFrameRate

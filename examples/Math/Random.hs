@@ -13,8 +13,7 @@ height = 360
 setup = do
   size (width, height)
   strokeWeight 20
-  -- todo implement
-  -- frameRate 2
+  frameRate 2
 
 draw () = do
 	forM_ [0 .. width] $ \i -> do

@@ -9,7 +9,7 @@ module Graphics.Proc(
 	-- * Environment
 	winSize, winWidth, winHeight,
 	size,
-	smooth, noSmooth, frameCount,
+	smooth, noSmooth, frameCount, frameRate,
 
 	-- * Data
 

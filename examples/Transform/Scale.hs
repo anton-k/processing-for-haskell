@@ -18,9 +18,8 @@ dim = 80.0
 setup = do    
   size (width, height)
   noStroke
-  rectMode Center
-  -- need to implement  
-  -- frameRate(30); 
+  rectMode Center  
+  frameRate 30
   return 0
 
 draw a = do 
@@ -38,4 +37,4 @@ draw a = do
   where 
   	s = cos a * 2
   
-update a = return (a + 0.004)
+update a = return (a + 0.04)

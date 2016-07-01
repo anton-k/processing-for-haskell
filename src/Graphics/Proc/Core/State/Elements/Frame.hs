@@ -8,7 +8,7 @@ import Data.Default
 
 data FrameState = FrameState 
   { frameCount :: Int
-  , frameRate  :: Int
+  , frameRate  :: Float
   , frameLoop  :: LoopMode
   }
 

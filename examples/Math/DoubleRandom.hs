@@ -17,11 +17,10 @@ dx = width / steps
 setup = do
   size (width, height)
   stroke (grey 255)
-  randRef <- newPioRef 0
+  frameRate 1
+  randRef <- newPioRef 0  
   return randRef
-  -- todo implement
-  -- frameRate 1
-
+  
 draw randRef = do
 	background (grey 0)
 	writePioRef randRef 0
