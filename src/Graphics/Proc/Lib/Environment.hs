@@ -31,7 +31,3 @@ smooth = liftIO $ pointSmooth $= Enabled
 noSmooth :: Pio ()
 noSmooth = liftIO $ pointSmooth $= Disabled
 
---------------------------------------------
-
-frameCount :: Pio Int
-frameCount = Pio $ fmap globalFrameCount S.get

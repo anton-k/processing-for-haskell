@@ -18,17 +18,18 @@ import Graphics.Proc.Core
 import Graphics.Proc.Lib.Environment
 
 onRandom :: (Maybe StdGen -> IO (a, Maybe StdGen)) -> Pio a
-onRandom f = Pio $ do
-  st <- S.get
-  (res, gen) <- liftIO $ f (globalRandomGen st)
-  S.put (st { globalRandomGen = gen })
+onRandom f = do
+  gen <- getRandomGen
+  (res, gen1) <- liftIO $ f gen
+  putRandomGen gen1
   return res
 
 onNoise :: (NoiseDetails -> Maybe Perlin.Seed -> IO (a, Maybe Perlin.Seed)) -> Pio a
-onNoise f = Pio $ do
-  st <- S.get
-  (res, gen) <- liftIO $ f (globalNoiseDetails st) (globalNoiseGen st)
-  S.put (st { globalNoiseGen = gen })
+onNoise f = do
+  noiseDetails <- getNoiseDetails
+  gen <- getNoiseGen  
+  (res, gen1) <- liftIO $ f noiseDetails gen
+  putNoiseGen gen1  
   return res
 
 randomSeed :: Int -> Pio ()
@@ -69,15 +70,10 @@ noiseSeed :: Int -> Pio ()
 noiseSeed n = onNoise $ const $ const $ return ((), Just n)
 
 noiseOctaves :: Int -> Pio ()
-noiseOctaves octaves = Pio $ do
-  st <- S.get  
-  let details = globalNoiseDetails st
-  S.put (st { globalNoiseDetails = details { noiseDetailsOctaves = octaves }})
+noiseOctaves octaves = putOctaves octaves
 
 noiseDetails :: Int -> Float -> Pio ()
-noiseDetails octaves fallOff = Pio $ do
-  st <- S.get  
-  S.put (st { globalNoiseDetails = NoiseDetails octaves fallOff })
+noiseDetails octaves fallOff = putNoiseDetails $ NoiseDetails octaves fallOff
 
 noise1 :: Float -> Pio Float
 noise1 x = noise3 (x, 0, 0)

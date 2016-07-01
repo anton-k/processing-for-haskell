@@ -15,20 +15,17 @@ import qualified Graphics.Rendering.OpenGL as G
 
 import Graphics.Proc.Core
 
-setStroke x = Pio $ modify $ \s -> s { globalStroke = x }
-setFill   x = Pio $ modify $ \s -> s { globalFill = x }
-
 stroke :: Col -> Draw
-stroke col = setStroke (Just col)
+stroke = putStroke . Just
 
 noStroke :: Draw
-noStroke = setStroke Nothing
+noStroke = putStroke Nothing
 
 fill :: Col -> Draw
-fill col = setFill (Just col)
+fill = putFill . Just
 
 noFill :: Draw
-noFill = setFill Nothing
+noFill = putFill Nothing
 
 strokeFill :: Col -> Draw
 strokeFill col = do

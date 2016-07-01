@@ -5,7 +5,7 @@ module Graphics.Proc.Lib.Input.Keyboard(
 import Graphics.Proc.Core	
 
 key :: Pio Key
-key = readPio lastPressedKey
+key = getLastPressedKey
 
 modifiers :: Pio Modifiers
-modifiers = readPio pressedModifiers
+modifiers = getPressedModifiers

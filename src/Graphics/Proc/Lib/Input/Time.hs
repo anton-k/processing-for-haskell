@@ -48,8 +48,8 @@ second = liftIO $ fmap toSecond $ getCurrentTime >>= return . fromRational . toR
     toSecond x = (floor x) `mod` 60
 
 millis :: Pio Int 
-millis = Pio $ do
-  start <- fmap globalStartTime get
+millis = do
+  start <- getStartTime
   now   <- liftIO $ getCurrentTime
   return $ floor $ (* 1000) $ diffUTCTime now start
 

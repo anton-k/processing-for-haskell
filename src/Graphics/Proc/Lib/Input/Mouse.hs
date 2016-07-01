@@ -7,7 +7,7 @@ import Graphics.Proc.Core
 import Graphics.Proc.Lib.Environment
 
 mouse :: Pio P2
-mouse = readPio ((\(x, y) -> (fromIntegral x, fromIntegral y)) . mousePosition)
+mouse = getMousePosition
 
 mouseX, mouseY :: Pio Float
 

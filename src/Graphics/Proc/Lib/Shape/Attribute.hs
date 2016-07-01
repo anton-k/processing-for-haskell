@@ -9,7 +9,7 @@ import Graphics.Rendering.OpenGL
 import Graphics.Proc.Core
 
 ellipseMode :: EllipseMode -> Draw
-ellipseMode mode = Pio $ modify $ \s -> s { globalEllipseMode = mode }
+ellipseMode = putEllipseMode
 
 strokeWeight :: Float -> Draw
 strokeWeight x = liftIO $ lineWidth $= x

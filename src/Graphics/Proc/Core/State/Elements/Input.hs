@@ -1,6 +1,5 @@
 module Graphics.Proc.Core.State.Elements.Input(
-    InputState(..), MouseButton(..), Modifiers(..), Key(..), KeyState(..),
-    UpdateInput, saveKeyPress, saveMouseButton, savePosition
+    InputState(..), MouseButton(..), Modifiers(..), Key(..), KeyState(..)   
 ) where
 
 import Data.Default 
@@ -25,18 +24,3 @@ instance Default InputState where
     , mousePosition   = (0, 0)
     , pressedButton   = Nothing
     }
-
-------------------------------------------------------
-
-type UpdateInput = State InputState ()
-
-saveKeyPress :: Key -> UpdateInput
-saveKeyPress key = modify $ \x -> x { lastPressedKey = key }
-
-saveMouseButton :: Maybe MouseButton -> UpdateInput
-saveMouseButton mb = modify $ \x -> x { pressedButton = mb }
-
-fromPosition (Position x y) = (fromEnum x, fromEnum y)
-
-savePosition :: Position -> UpdateInput
-savePosition pos = modify $ \x -> x { mousePosition = fromPosition pos }

@@ -102,23 +102,23 @@ runProc p = do
       return s2
 
     keyMouse ref key keyState modifiers pos = updateSt ref $ \s -> do
-      savePosition pos
+      putPosition pos
       case keyState of 
         Down -> do
           case key of
             MouseButton mb -> do
-              saveMouseButton (Just mb)
+              putMouseButton (Just mb)
               procMousePressed p s
             keyPress -> do
-              saveKeyPress keyPress
+              putKeyPress keyPress
               procKeyPressed p s
         Up   -> 
           case key of
             Char ch -> procKeyReleased p s
             SpecialKey sk -> return s
             MouseButton mb -> do
-              saveMouseButton Nothing
+              putMouseButton Nothing
               procMouseReleased p s     
 
-    mouseMotion ref pos = passSt ref $ savePosition pos
-    passiveMouseMotion ref pos = passSt ref $ savePosition pos
+    mouseMotion ref pos = passSt ref $ putPosition pos
+    passiveMouseMotion ref pos = passSt ref $ putPosition pos

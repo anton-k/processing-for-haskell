@@ -1,9 +1,10 @@
 module Graphics.Proc.Core.State.Elements.Draw(
     DrawState(..),
     EllipseMode, RectMode, DrawMode(..), 
-    StrokeCap(..), StrokeJoin(..)
+    StrokeCap(..), StrokeJoin(..)    
 ) where
 
+import Control.Monad.Trans.State.Strict
 import Data.Default
 import Graphics.Proc.Core.GLBridge
 
@@ -13,8 +14,8 @@ data DrawState = DrawState
   , drawStrokeCap     :: StrokeCap
   , drawStrokeJoin    :: StrokeJoin
   , drawStrokeWeight  :: Float
-  , drawFill          :: Col
-  , drawStroke        :: Col  
+  , drawFill          :: Maybe Col
+  , drawStroke        :: Maybe Col  
   }
 
 instance Default DrawState where
@@ -24,8 +25,8 @@ instance Default DrawState where
     , drawStrokeCap    = Round
     , drawStrokeJoin   = JoinMiter
     , drawStrokeWeight = 1
-    , drawFill         = Col 1 1 1 1
-    , drawStroke       = Col 1 1 1 1
+    , drawFill         = Just $ Col 1 1 1 1
+    , drawStroke       = Just $ Col 1 1 1 1
     }
 
 type EllipseMode = DrawMode
@@ -48,3 +49,5 @@ data StrokeJoin = JoinMiter | JoinBevel | JoinRound
 
 instance Default StrokeJoin where  
   def = JoinMiter
+
+----------------------------------------------------------

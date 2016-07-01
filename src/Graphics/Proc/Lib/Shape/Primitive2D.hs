@@ -30,11 +30,10 @@ pointPath ps = do
   setStrokeColor
   drawP2 Points ps
 
-
 setStrokeColor :: Pio ()
-setStrokeColor = Pio $ do
-  mcol <- fmap globalStroke get
-  unPio $ setCol $ maybe defStrokeColor id mcol
+setStrokeColor = setCol . maybe black id =<< getStroke
+
+black = Col 0 0 0 1  
 
 line :: P2 -> P2 -> Draw
 line p1 p2 = do
@@ -47,9 +46,9 @@ linePath ps = do
   drawP2 LineStrip ps
 
 ellipse :: P2 -> P2 -> Draw
-ellipse center rad = Pio $ do
-  mode <- fmap globalEllipseMode get
-  unPio $ drawProcP2 (Polygon, LineLoop) (modeEllipsePoints mode 150 rad center) 
+ellipse center rad = do
+  mode <- getEllipseMode
+  drawProcP2 (Polygon, LineLoop) (modeEllipsePoints mode 150 rad center) 
 
 circle :: Float -> P2 -> Draw
 circle rad center = drawProcP2 (Polygon, LineLoop) (modeEllipsePoints Radius 150 (rad, rad) center) 
@@ -95,19 +94,15 @@ ellipsePoints number (radx, rady) (cx, cy) =
 drawP2 primType ps = do   
   liftIO $ renderPrimitive primType $ mapM_ v2 ps
 
-drawProcP2 (onFill, onStroke) ps = Pio $ do
-    s <- get    
-    maybeDraw onFill   globalFill s    
-    maybeDraw onStroke globalStroke s
-    where
-        maybeDraw shapeType select s = unPio $ maybe (return ()) (go shapeType) $ select s  
-
-        go shapeType col = do            
+drawProcP2 (onFill, onStroke) ps = do    
+    go onFill   =<< getFill    
+    go onStroke =<< getStroke
+    where        
+        go shapeType mcol = case mcol of
+          Just col -> do            
             setCol col
             drawP2 shapeType ps
-
-defStrokeColor = black
-black = Col 0 0 0 1
+          Nothing -> return ()
 
 setCol :: Col -> Draw
 setCol col = liftIO $ currentColor $= glCol col

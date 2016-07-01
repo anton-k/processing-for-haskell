@@ -43,7 +43,7 @@ module Graphics.Proc(
 	-- ** 3D Primitives
 
 	-- ** Attributes
-	EllipseMode(..), ellipseMode,
+	EllipseMode, RectMode, DrawMode(..), ellipseMode,
 	strokeWeight,
 
 	-- ** Vertex
@@ -162,7 +162,6 @@ import Data.VectorSpace hiding (Sum(..))
 import Data.NumInstances
 import Data.AffineSpace
 import Data.Cross
-
 
 import Graphics.Proc.Core
 import Graphics.Proc.Lib
