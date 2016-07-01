@@ -54,12 +54,21 @@ library
   -- Modules included in this library but not exported.
   other-modules:  
     Graphics.Proc.Core
-
-    Graphics.Proc.Core.Pio 
+    
     Graphics.Proc.Core.PioRef    
     Graphics.Proc.Core.Run
     Graphics.Proc.Core.GLBridge
     Graphics.Proc.Core.Vector
+
+    Graphics.Proc.Core.State
+    Graphics.Proc.Core.State.Pio 
+    Graphics.Proc.Core.State.Elements
+    Graphics.Proc.Core.State.Elements.Input
+    Graphics.Proc.Core.State.Elements.Rnd
+    Graphics.Proc.Core.State.Elements.Draw
+    Graphics.Proc.Core.State.Elements.Font
+    Graphics.Proc.Core.State.Elements.Frame
+    Graphics.Proc.Core.State.Elements.Time
 
     Graphics.Proc.Lib
 

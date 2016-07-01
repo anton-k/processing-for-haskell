@@ -6,7 +6,7 @@ import Data.IORef
 
 import Control.Monad.IO.Class
 
-import Graphics.Proc.Core.Pio
+import Graphics.Proc.Core.State
 
 newtype PioRef a = PioRef { unPioRef :: IORef a }
 	deriving (Eq)

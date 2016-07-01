@@ -1,9 +1,9 @@
 module Graphics.Proc.Core.GLBridge(
-	MouseButton(..), Modifiers(..), Key(..), KeyState(..), 
+  MouseButton(..), Modifiers(..), Key(..), KeyState(..), Position(..),
   -- Font,
-	Col(..), glCol,
+  Col(..), glCol,
   f2d, v2, p2v,
-	glSize, setupWindow, getWindowSize  
+  glSize, setupWindow, getWindowSize  
 ) where
 
 import Graphics.Rendering.OpenGL hiding (scale, translate, rotate, rect, height, width)

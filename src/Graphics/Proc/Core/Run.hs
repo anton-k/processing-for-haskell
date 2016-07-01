@@ -1,6 +1,6 @@
 {-# Language FlexibleContexts #-}
 module Graphics.Proc.Core.Run(
-	Proc(..), runProc, Draw, TimeInterval
+	Proc(..), runProc, Draw
 ) where
 
 import Control.Monad.IO.Class
@@ -11,15 +11,12 @@ import Data.IORef
 import qualified Graphics.Rendering.OpenGL as G
 import Graphics.Rendering.OpenGL
 import Graphics.UI.GLUT
-import Data.Time.Clock
-import Data.Time.Calendar
 
-import Graphics.Proc.Core.Pio
+import Graphics.Proc.Core.State
 import Graphics.Proc.Core.GLBridge
 
-type Update s = s -> Pio s
-type TimeInterval = Float
 
+type Update s = s -> Pio s
 type Draw = Pio ()
 
 data Proc s = Proc 
@@ -43,7 +40,7 @@ data Proc s = Proc
 
 instance Default (Proc s) where
     def = Proc
-        { procSetup = return $ error "No setup is defined. Plese define the procSetup value."
+        { procSetup = return $ error "No setup is defined. Please define the procSetup value."
         , procUpdate = return
         , procUpdateTime = const return
         , procDraw = const (return ()) 
@@ -59,102 +56,69 @@ instance Default (Proc s) where
         , procKeyTyped      = return
         }
 
+data St s = St
+  { stUser   :: s
+  , stGlobal :: GlobalState }
+
+initSt :: Proc s -> IO (St s)
+initSt p = do
+  (user, global) <- runPio (procSetup p) =<< defGlobalState
+  return $ St user global
+
+updateSt :: IORef (St s) -> Update s -> IO ()
+updateSt ref f = do
+  st <- get ref
+  (user, global) <- runPio (f (stUser st)) (stGlobal st)
+  ref $= St user global
+
+passSt :: IORef (St s) -> Pio () -> IO ()
+passSt ref p = updateSt ref $ \s -> p >> return s
 
 runProc :: Proc s -> IO ()
 runProc p = do
   setupWindow
+  ref <- newIORef =<< initSt p   
 
-  inputSt <- newIORef (def :: InputState)
-  globalStRef <- newIORef =<< (liftIO . defGlobalState =<< G.get inputSt)
-
-  (initSt, globalSt) <- runPio (procSetup p) =<< G.get globalStRef
-  globalStRef $= globalSt
-  st <- newIORef initSt
-
-  displayCallback $= display st globalStRef inputSt
-  idleCallback $= Just (idle st globalStRef inputSt)
-  keyboardMouseCallback $= Just (keyMouse st globalStRef inputSt)
-  motionCallback $= Just (mouseMotion inputSt)
-  passiveMotionCallback $= Just (passiveMouseMotion inputSt)
+  displayCallback       $= display ref
+  idleCallback          $= Just (idle ref)
+  keyboardMouseCallback $= Just (keyMouse ref)
+  motionCallback        $= Just (mouseMotion ref)
+  passiveMotionCallback $= Just (passiveMouseMotion ref)
 
   mainLoop
   where   
-    display st globalStRef inputStRef = do      
-      loadIdentity
-      updateState (\s -> procDraw p s >> return s) st globalStRef inputStRef         
-      swapBuffers
-      updateFrameCount globalStRef
+    display ref = updateSt ref $ \s -> do      
+      liftIO $ loadIdentity
+      procDraw p s      
+      liftIO $ swapBuffers
+      updateFrameCount
+      return s
 
-    idle st globalStRef inputStRef = do
-      updateState (procUpdate p) st globalStRef inputStRef
-      updateStateWithTime (procUpdateTime p) st globalStRef inputStRef
-      postRedisplay Nothing
+    idle ref = updateSt ref $ \s -> do
+      s1 <- procUpdate p s
+      dt <- getDuration
+      s2 <- procUpdateTime p dt s1
+      liftIO $ postRedisplay Nothing
+      return s2
 
-    updateState f st globalStRef inputStRef = do
-      s <- G.get st
-      inputSt <- G.get inputStRef
-      globalSt <- G.get globalStRef
-      (s1, globalSt1) <- runPio (f s) (globalSt { globalInputState = inputSt })
-      globalStRef $= globalSt1
-      st $=! s1
-
-    updateStateWithTime f st globalStRef inputStRef = do
-      s <- G.get st
-      inputSt <- G.get inputStRef
-      globalSt <- G.get globalStRef 
-
-      let prevTime = globalLastTime globalSt
-      now <- getCurrentTime
-      let dt = fromRational $ toRational $ diffUTCTime now prevTime
-          globalSt1 = globalSt { globalLastTime = now }
-      (s1, globalSt2) <- runPio (f dt s) (globalSt1 { globalInputState = inputSt })
-      globalStRef $= globalSt2
-      st $=! s1
-
-    saveKeyPress key inputStRef = do
-      inputSt <- G.get inputStRef
-      inputStRef $= inputSt { lastPressedKey = key }
-
-    saveMouseButton mb inputStRef = do
-      inputSt <- G.get inputStRef
-      inputStRef $= inputSt { pressedButton = mb }
-
-    keyMouse st globalStRef inputStRef key keyState modifiers pos = do
-      inputSt <- G.get inputStRef
-      let inputSt1 = inputSt { lastPressedKey = key, pressedModifiers = modifiers, mousePosition = fromPosition pos }
+    keyMouse ref key keyState modifiers pos = updateSt ref $ \s -> do
+      savePosition pos
       case keyState of 
         Down -> do
           case key of
-            Char ch -> do
-              saveKeyPress (Char ch) inputStRef
-              updateState (procKeyPressed p) st globalStRef inputStRef
-            SpecialKey sk -> do
-              saveKeyPress (SpecialKey sk) inputStRef 
-              updateState (procKeyPressed p) st globalStRef inputStRef
             MouseButton mb -> do
-              saveMouseButton (Just mb) inputStRef
-              updateState (procMousePressed p) st globalStRef inputStRef
+              saveMouseButton (Just mb)
+              procMousePressed p s
+            keyPress -> do
+              saveKeyPress keyPress
+              procKeyPressed p s
         Up   -> 
           case key of
-            Char ch -> updateState (procKeyReleased p) st globalStRef inputStRef
-            SpecialKey sk -> return ()
+            Char ch -> procKeyReleased p s
+            SpecialKey sk -> return s
             MouseButton mb -> do
-              saveMouseButton Nothing inputStRef
-              updateState (procMouseReleased p) st globalStRef inputStRef
-      inputStRef $=! inputSt1
+              saveMouseButton Nothing
+              procMouseReleased p s     
 
-    mouseMotion inputStRef pos = do
-      writePosition inputStRef pos
-
-    passiveMouseMotion inputStRef pos = do
-      writePosition inputStRef pos
-
-    fromPosition (Position x y) = (fromEnum x, fromEnum y)
-
-    writePosition ref pos = do
-      inputSt <- G.get ref
-      ref $=! inputSt { mousePosition = fromPosition pos }      
-
-    updateFrameCount globalStRef = do
-      globalSt <- G.get globalStRef
-      globalStRef $= globalSt { globalFrameCount = globalFrameCount globalSt + 1 }
+    mouseMotion ref pos = passSt ref $ savePosition pos
+    passiveMouseMotion ref pos = passSt ref $ savePosition pos
