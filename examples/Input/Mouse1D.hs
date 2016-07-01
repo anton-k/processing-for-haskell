@@ -16,7 +16,7 @@ setup = do
   noStroke
   -- todo implement
   -- colorMode(RGB, height, height, height);
-  -- rectMode(CENTER)
+  rectMode Center
 
 grey' = grey . remap (0, height) (0, 255)
 

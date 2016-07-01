@@ -14,9 +14,8 @@ center = (width/2, height/2)
 
 setup = do    
   size (width, height)
-  noStroke
-  -- not implemented yet
-  -- rectMode(CENTER)
+  noStroke  
+  rectMode Center
   return (0, 0)
 
 scalar = 70

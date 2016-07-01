@@ -18,8 +18,8 @@ dim = 80.0
 setup = do    
   size (width, height)
   noStroke
-  -- need to implement
-  -- rectMode(CENTER);
+  rectMode Center
+  -- need to implement  
   -- frameRate(30); 
   return 0
 

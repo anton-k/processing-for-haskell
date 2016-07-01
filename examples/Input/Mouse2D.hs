@@ -14,7 +14,7 @@ setup = do
   size (width, height)
   noStroke
   -- todo implement  
-  -- rectMode(CENTER)
+  rectMode Center
 
 draw () = do
   background (grey 51)

@@ -18,8 +18,8 @@ module Graphics.Proc.Core.State(
     EllipseMode, RectMode, DrawMode(..), 
     StrokeCap(..), StrokeJoin(..),
 
-    getStroke, getFill, getEllipseMode, 
-    putEllipseMode, putStroke, putFill,
+    getStroke, getFill, getEllipseMode, getRectMode,
+    putEllipseMode, putStroke, putFill, putRectMode,
 
 	-- * Font
 
@@ -87,8 +87,14 @@ getFill = fmap drawFill $ onDraw get
 getEllipseMode :: Pio EllipseMode
 getEllipseMode = fmap drawEllipseMode $ onDraw get
 
+getRectMode :: Pio RectMode
+getRectMode = fmap drawRectMode $ onDraw get
+
 putEllipseMode :: EllipseMode -> Pio ()
 putEllipseMode value = onDraw $ modify $ \x -> x { drawEllipseMode = value }
+
+putRectMode :: RectMode -> Pio ()
+putRectMode value = onDraw $ modify $ \x -> x { drawRectMode = value }
 
 putStroke :: Maybe Col -> Pio ()
 putStroke value = onDraw $ modify $ \x -> x { drawStroke = value }

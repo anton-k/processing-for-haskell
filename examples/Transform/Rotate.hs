@@ -22,9 +22,8 @@ dim = 80.0
 setup = do    
   size (width, height)
   noStroke
-  fill (grey 255)
-  -- need to implement
-  -- rectMode(CENTER);  
+  fill (grey 255)  
+  rectMode Center
   return (0, 0)
 
 draw (angle, _) = do 

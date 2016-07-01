@@ -17,9 +17,8 @@ boxSize = 75
 center = 0.5 *^ (width, height)
 
 setup = do
-  size (width, height)
-  -- todo
-  -- rectMode Radius
+  size (width, height)  
+  rectMode Radius
   noStroke
   return (center, mlockPoint)
   where mlockPoint = Nothing

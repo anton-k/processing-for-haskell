@@ -1,4 +1,4 @@
--- original code: https://processing.org/examples/easing.html
+-- original code: https://processing.org/examples/constrain.html
 
 -- Easing.
 -- 
@@ -25,7 +25,7 @@ inner  = edge + radius
 setup = do
   size (width, height)
   ellipseMode Radius
-  --rectMode Center
+  rectMode Corners
   noStroke
   return center
 

@@ -43,7 +43,7 @@ module Graphics.Proc(
 	-- ** 3D Primitives
 
 	-- ** Attributes
-	EllipseMode, RectMode, DrawMode(..), ellipseMode,
+	EllipseMode, RectMode, DrawMode(..), ellipseMode, rectMode,
 	strokeWeight,
 
 	-- ** Vertex

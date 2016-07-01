@@ -1,5 +1,5 @@
 module Graphics.Proc.Lib.Shape.Attribute(
-	EllipseMode(..), ellipseMode,
+	EllipseMode(..), ellipseMode, rectMode,
 	strokeWeight
 ) where
 
@@ -10,6 +10,9 @@ import Graphics.Proc.Core
 
 ellipseMode :: EllipseMode -> Draw
 ellipseMode = putEllipseMode
+
+rectMode :: RectMode -> Draw
+rectMode = putRectMode
 
 strokeWeight :: Float -> Draw
 strokeWeight x = liftIO $ lineWidth $= x

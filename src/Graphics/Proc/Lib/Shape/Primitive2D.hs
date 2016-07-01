@@ -12,7 +12,28 @@ triangle :: P2 -> P2 -> P2 -> Draw
 triangle p1 p2 p3 = drawProcP2 (Triangles, LineLoop) [p1, p2, p3]    
 
 rect :: P2 -> P2 -> Draw
-rect (x, y) (w, h) = drawProcP2 (Polygon, LineLoop) [(x, y), (x, y + h), (x + w, y + h), (x + w, y)]
+rect a b = uncurry cornerRect =<< fmap (\mode -> modeRectPoints mode a b) getRectMode
+
+cornerRect :: P2 -> P2 -> Draw
+cornerRect (x, y) (w, h) = drawProcP2 (Polygon, LineLoop) [(x, y), (x, y + h), (x + w, y + h), (x + w, y)]
+
+modeRectPoints mode (a, b) (c, d) = case mode of
+  Corner  -> ((a, b), (c, d))
+  Corners -> ((a, b), (c - a, d - b))
+  Radius  -> 
+      let rx = c
+          ry = d
+          cx = a
+          cy = b
+      in ((cx - rx, cy - ry), (2 * rx, 2 * ry))
+  Center ->
+      let dx = c
+          dy = d
+          rx = dx / 2
+          ry = dy / 2
+          cx = a
+          cy = b
+      in ((cx - rx, cy - ry), (dx, dy))
 
 quad :: P2 -> P2 -> P2 -> P2 -> Draw
 quad p1 p2 p3 p4 = drawProcP2 (Polygon, LineLoop) [p1, p2, p3, p4]
