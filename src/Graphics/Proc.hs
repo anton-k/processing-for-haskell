@@ -1,4 +1,4 @@
--- | Processing functions.
+-- | Imperative EDSL for graphics and animation. The libary implements a Processing in Haskell.
 --
 -- An example:
 --
@@ -17,6 +17,7 @@
 -- > 
 -- > update x = return (x + 0.1)
 -- > 
+-- We can find the quistart guide and lots of examples in the project repository on github <https://github.com/anton-k/processing-for-haskell> (see the directory @examples@).
 module Graphics.Proc(
 	-- * Structure
 	Proc(..), runProc,

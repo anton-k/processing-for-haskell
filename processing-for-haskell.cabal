@@ -13,10 +13,13 @@ name:                processing-for-haskell
 version:             0.1.0.0
 
 -- A short (one-line) description of the package.
-synopsis:            Computer graphics for kids and artists with Processing implemented in Haskell
+synopsis:           Computer graphics for kids and artists with Processing implemented in Haskell. 
 
 -- A longer description of the package.
--- description:         
+description:        The library implements the Processing in Haskell (see <https://processing.org/>). It's an imperative EDSL for graphics and animation.
+                    It's very easy and fun to use. There are many books on processing and community is fairly active. 
+                    We can find the quick start guide and lots of examples in the project repository 
+                    on github <https://github.com/anton-k/processing-for-haskell> (see the directory @examples@).
 
 -- The license under which the package is released.
 license:             BSD3
