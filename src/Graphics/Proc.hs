@@ -4,7 +4,7 @@ module Graphics.Proc(
 	Proc(..), runProc,
 	
 	-- * Types
-	Pio, Draw, Col(..), P2, P3,
+	Pio, Draw, Update, TimeInterval, Col(..), P2, P3,
 
 	-- * Environment
 	winSize, winWidth, winHeight,

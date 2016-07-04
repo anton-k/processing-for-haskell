@@ -5,6 +5,7 @@ module Graphics.Proc.Core.State.Elements.Time(
 import Data.Time.Clock
 import Control.Monad.Trans.State.Strict
 
+-- | Time duration in seconds.
 type TimeInterval = Float
 
 data TimeState = TimeState 

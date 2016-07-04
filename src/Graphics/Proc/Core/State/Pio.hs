@@ -14,6 +14,8 @@ import Control.Monad.Trans.State.Strict
 
 import Graphics.Proc.Core.State.Elements
 
+-- | Processing IO-monad. It has the same meaning as the Haskell IO-monad but
+-- it's augmented with Processing library functions.
 newtype Pio a = Pio { unPio :: StateT GlobalState IO a }
   deriving (Functor, Applicative, Monad, MonadIO)
 

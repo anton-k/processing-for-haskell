@@ -15,6 +15,8 @@ import Data.Default
 import Control.Monad.IO.Class
 import GHC.Float
 
+-- | Color datatype. It contains values for three components of the color and transparency.
+-- All values range in the interval from 0 to 1.
 data Col = Col Float Float Float Float
     deriving (Show)
 

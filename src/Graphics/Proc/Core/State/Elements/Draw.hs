@@ -29,9 +29,13 @@ instance Default DrawState where
     , drawStroke       = Just $ Col 1 1 1 1
     }
 
+-- | Modes for drawing of ellipse. See @ellipseMode@.
 type EllipseMode = DrawMode
+
+-- | Modes for drawing of rectangle. See @rectMode@.
 type RectMode = DrawMode
 
+-- | Modes for drawing of rectangle or ellipse.
 data DrawMode = Radius | Center | Corner | Corners
   deriving (Show, Eq, Enum, Bounded)
 

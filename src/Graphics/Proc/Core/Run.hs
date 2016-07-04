@@ -1,6 +1,6 @@
 {-# Language FlexibleContexts #-}
 module Graphics.Proc.Core.Run(
-	Proc(..), runProc, Draw
+	Proc(..), runProc, Draw, Update, TimeInterval
 ) where
 
 import Control.Monad.IO.Class
@@ -16,9 +16,34 @@ import Graphics.Proc.Core.State
 import Graphics.Proc.Core.GLBridge
 
 
+-- | A alias for value update inside processing IO-monad.
 type Update s = s -> Pio s
+
+-- | An alias for processing procedures.
 type Draw = Pio ()
 
+-- | It holds all processing standard callbacks. 
+-- With itwe can set the setup, draw, and update functions.
+-- Here we can specify how to react on user-input.
+--
+-- All functions update the program state. They take it in as an argument and produce as result.
+-- In Haskell we can not manipulate globl variables with uch ease as Procesing provides.
+-- So we have to find out another way to update the state. The natural way for Haskell is to keep
+-- the thing as explicit as possible. That leeds to the following descisions:
+--
+-- * @setup@ returns the initial state.
+--
+-- * @draw@ takes the state as an argument and draws it.
+--
+-- * @update@ should take in the current state and return back the next state.
+--
+-- * All input processing functions also manipulate the state explicitly by passing arguments.
+--
+-- Notice that the processing function draw is split on two functions: draw and update.
+-- The draw is only for drawing the program state and update is for state update.
+--
+-- There is a useful function procUpdateTime that provides a time interval that has passed since
+-- the previous update of the state. It can be useful for physics engines.
 data Proc s = Proc 
     { procSetup :: Pio s
     , procUpdate :: Update s
@@ -74,6 +99,8 @@ updateSt ref f = do
 passSt :: IORef (St s) -> Pio () -> IO ()
 passSt ref p = updateSt ref $ \s -> p >> return s
 
+-- | The main function for rendering processing actions.
+-- It sets the scene and starts the rendering of animation.
 runProc :: Proc s -> IO ()
 runProc p = do
   setupWindow

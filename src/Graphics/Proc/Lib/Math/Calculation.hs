@@ -4,6 +4,7 @@ module Graphics.Proc.Lib.Math.Calculation(
 
 import Graphics.Proc.Core
 
+-- | Interval for float value @(minValue, maxValue)@. 
 type FloatInterval = (Float, Float)
 
 -- | Re-maps a number from one range to another. Originally called map in the Processing, but in Haskell this name is already taken.

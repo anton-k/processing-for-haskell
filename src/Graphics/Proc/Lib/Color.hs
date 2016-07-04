@@ -83,11 +83,30 @@ greya g a = rgba g g g a
 
 ------------------------------------------------------
 
+-- | White color.
+white :: Col
 white = Col 1 1 1 1
+
+-- | Black color.
+black :: Col
 black = Col 0 0 0 1
 
+-- | Red color.
+red :: Col
 red = Col 1 0 0 1
+
+-- | Green color.
+green :: Col
 green = Col 0 1 0 1
+
+-- | Blue color.
+blue :: Col
 blue = Col 0 0 1 1
+
+-- | Orange color.
+orange :: Col
 orange = Col 1 1 0 1
+
+-- | Yellow color.
+yellow :: Col
 yellow = Col 1 0 1 1

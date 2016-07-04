@@ -9,5 +9,8 @@ module Graphics.Proc.Core.Vector(
 import Data.VectorSpace
 import Data.NumInstances
 
+-- | 2D vector.
 type P2 = (Float, Float)
+
+-- | 3D vector.
 type P3 = (Float, Float, Float)
