@@ -85,6 +85,9 @@ greya g a = rgba g g g a
 
 ------------------------------------------------------
 
+setAlpha :: Float -> Col -> Col
+setAlpha x (Col r g b _) = Col r g b (x)
+
 -- | White color.
 white :: Col
 white = Col 1 1 1 1

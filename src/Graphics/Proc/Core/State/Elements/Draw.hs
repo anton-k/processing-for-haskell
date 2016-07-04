@@ -25,8 +25,8 @@ instance Default DrawState where
     , drawStrokeCap    = Round
     , drawStrokeJoin   = JoinMiter
     , drawStrokeWeight = 1
-    , drawFill         = Just $ Col 1 1 1 1
-    , drawStroke       = Just $ Col 1 1 1 1
+    , drawFill         = Just $ Col 0 0 0 1
+    , drawStroke       = Just $ Col 0 0 0 1
     }
 
 -- | Modes for drawing of ellipse. See @ellipseMode@.
