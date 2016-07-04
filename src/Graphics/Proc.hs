@@ -1,4 +1,22 @@
 -- | Processing functions.
+--
+-- An example:
+--
+-- > import Graphics.Proc
+-- > 
+-- > main = runProc $ def { procSetup = setup, procDraw = draw, procUpdate = update }
+-- > 
+-- > setup = do
+-- > 	size (300, 300)
+-- > 	return 0
+-- > 
+-- > draw x = do	
+-- > 	background (grey 255)
+-- > 	fill (rgb 0 255 0)
+-- > 	circle 20 (150 + 50 * sin x, 150)
+-- > 
+-- > update x = return (x + 0.1)
+-- > 
 module Graphics.Proc(
 	-- * Structure
 	Proc(..), runProc,
