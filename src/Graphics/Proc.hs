@@ -174,13 +174,15 @@ module Graphics.Proc(
 	module Data.Default,
 	module Data.Monoid,
 	module Control.Monad,
+	module Control.Monad.IO.Class,
 	module Control.Applicative	
 ) where
 
 import Data.Default
-import Control.Monad
-import Control.Applicative
 import Data.Monoid
+import Control.Monad
+import Control.Monad.IO.Class
+import Control.Applicative
 
 import Data.VectorSpace hiding (Sum(..))
 import Data.NumInstances
@@ -189,3 +191,4 @@ import Data.Cross
 
 import Graphics.Proc.Core
 import Graphics.Proc.Lib
+
