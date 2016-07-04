@@ -6,7 +6,9 @@ module Graphics.Proc.Lib.Color(
 
 	rgb, grey, rgba, greya,
 
-	white, black, green, blue, orange, yellow, red
+	white, black, navy, blue, aqua, teal, olive, green,
+	lime, yellow, orange, red, maroon, fushsia, purple,
+	gray, silver
 ) where
 
 import Control.Monad.Trans.State.Strict
@@ -91,22 +93,62 @@ white = Col 1 1 1 1
 black :: Col
 black = Col 0 0 0 1
 
--- | Red color.
-red :: Col
-red = Col 1 0 0 1
-
--- | Green color.
-green :: Col
-green = Col 0 1 0 1
+-- | Nave color.
+navy :: Col
+navy = rgb 0 31 63
 
 -- | Blue color.
 blue :: Col
-blue = Col 0 0 1 1
+blue = rgb 0 116 217
 
--- | Orange color.
-orange :: Col
-orange = Col 1 1 0 1
+-- | Aqua color.
+aqua :: Col
+aqua = rgb 127 219 255
+
+-- | Teal color.
+teal :: Col
+teal = rgb 57 204 204
+
+-- | Olive color.
+olive :: Col
+olive = rgb 61 153 112
+
+-- | Green color.
+green :: Col
+green = rgb 46 204 64
+
+-- | Lime color.
+lime :: Col
+lime = rgb 1 255 112
 
 -- | Yellow color.
 yellow :: Col
-yellow = Col 1 0 1 1
+yellow = rgb 255 220 0
+
+-- | Orange color
+orange :: Col 
+orange = rgb 255 33 27
+
+-- | Red color
+red :: Col
+red = rgb 255 65 54
+
+-- | Maroon color.
+maroon :: Col
+maroon = rgb 133 20 75
+
+-- | Fuchsia color.
+fushsia :: Col
+fushsia = rgb 240 18 190
+
+-- | Purple color
+purple :: Col
+purple = rgb 177 13 201
+
+-- | Gray color.
+gray :: Col
+gray = grey 170
+
+-- | Silver color.
+silver :: Col
+silver = grey 221

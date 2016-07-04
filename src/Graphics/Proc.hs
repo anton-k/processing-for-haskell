@@ -110,7 +110,10 @@ module Graphics.Proc(
     rgb, rgba, grey, greya, 
 	background, clear,
 
-	white, black, green, blue, orange, yellow, red,
+	white, black, navy, blue, aqua, teal, olive, green,
+	lime, yellow, orange, red, maroon, fushsia, purple,
+	gray, silver,
+
 
 	-- * Image	
 
