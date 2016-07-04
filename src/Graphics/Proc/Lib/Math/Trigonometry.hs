@@ -6,9 +6,11 @@ module Graphics.Proc.Lib.Math.Trigonometry(
 import Graphics.Proc.Core
 import Graphics.Proc.Lib.Math.Calculation
 
+-- | Converts degrees to radians.
 radians :: Float -> Float
 radians = remap (0, 360) (0, 2 * pi)
 
+-- | Converts rdians to degrees.
 degrees :: Float -> Float
 degrees = remap (0, 2 * pi) (0, 360)
 

@@ -1,4 +1,4 @@
--- | Processing primitves.
+-- | Processing functions.
 module Graphics.Proc(
 	-- * Structure
 	Proc(..), runProc,
@@ -13,24 +13,20 @@ module Graphics.Proc(
 	loop, noLoop, redraw,
 
 	-- * Data
-
-	-- ** Primitive
-
-	-- ** Composite
+	-- | We can use ordinary Haskell datatypes primitive and composite ones.
 
 	-- ** Conversion
 	float, int,
 	
 	-- ** String Functions
+	-- | We can use standard Haskell string functions.
 
 	-- ** Array Functions
+	--  | We can use Haskell arrays.
 	
 	-- * Control
+	-- | We can use plain old Bool datatype.
 
-	-- ** Relational Operators
-	-- ** Iteration
-	-- ** Conditionals
-	-- ** Logical Operators
 	
 	-- * Shape
 
@@ -134,9 +130,14 @@ module Graphics.Proc(
 
 	-- ** Random
 	randomSeed, random, random2, randomP2, randomCol, 
-	NoiseDetails(..), noiseSeed, noise1, noise2, noise3,
 	randomGaussian,
 
+	-- *** Perlin noise
+	-- | Returns the Perlin noise value at specified coordinates. Perlin noise is a random sequence generator producing a more natural, harmonic succession of numbers than that of the standard random() function. It was developed by Ken Perlin in the 1980s and has been used in graphical applications to generate procedural textures, shapes, terrains, and other seemingly organic forms.
+  	--
+  	-- processing docs: <https://processing.org/reference/noise_.html>
+	NoiseDetail(..), noiseDetail, noiseOctaves, noiseSeed, noise1, noise2, noise3,
+	
 	-- * Misc
 	onCircle, onLine, uon,
 

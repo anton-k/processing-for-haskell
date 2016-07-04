@@ -1,6 +1,6 @@
 module Graphics.Proc.Core.State.Elements.Rnd(
     RndState(..),
-    NoiseDetails(..), Seed
+    NoiseDetail(..), Seed
 ) where
 
 import Data.Default 
@@ -9,7 +9,7 @@ import System.Random
 data RndState = RndState 
   { rndRandomGen     :: Maybe StdGen
   , rndNoiseGen      :: Maybe Int
-  , rndNoiseDetails  :: NoiseDetails
+  , rndNoiseDetail   :: NoiseDetail
   }
 
 instance Default RndState where
@@ -17,10 +17,11 @@ instance Default RndState where
 
 type Seed = Maybe Int
 
-data NoiseDetails = NoiseDetails 
+-- | Parameters for perlin noise. See docs for function @noiseDetail@.
+data NoiseDetail = NoiseDetail 
   { noiseDetailsOctaves :: Int
   , noiseDetailsFalloff :: Float
   }
 
-instance Default NoiseDetails where
-  def = NoiseDetails 4 0.5
+instance Default NoiseDetail where
+  def = NoiseDetail 4 0.5

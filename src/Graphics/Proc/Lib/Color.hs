@@ -15,18 +15,31 @@ import qualified Graphics.Rendering.OpenGL as G
 
 import Graphics.Proc.Core
 
+-- | Sets the color used to draw lines and borders around shapes. 
+--
+-- processing docs: <https://processing.org/reference/stroke_.html>	
 stroke :: Col -> Draw
 stroke = putStroke . Just
 
+-- | Disables drawing the stroke (outline). If both noStroke() and noFill() are called, nothing will be drawn to the screen
+-- 
+-- processing docs: <https://processing.org/reference/noStroke_.html>	
 noStroke :: Draw
 noStroke = putStroke Nothing
 
+-- | Sets the color used to fill shapes. For example, if you run @fill (rgb 204 102 0)@, all subsequent shapes will be filled with orange. 
+--
+-- processing docs: <https://processing.org/reference/fill_.html>	
 fill :: Col -> Draw
 fill = putFill . Just
 
+-- | Disables filling geometry. If both noStroke() and noFill() are called, nothing will be drawn to the screen. 
+-- 
+-- processing docs: <https://processing.org/reference/noFill_.html>	
 noFill :: Draw
 noFill = putFill Nothing
 
+-- | Sets stroke and fill to the same color.
 strokeFill :: Col -> Draw
 strokeFill col = do
     stroke col 
@@ -34,10 +47,17 @@ strokeFill col = do
 
 ------------------------------------------------------
 
+-- | The background() function sets the color used for the background of the Processing window. The default background is light gray. This function is typically used within draw() to clear the display window at the beginning of each frame, but it can be used inside setup() to set the background on the first frame of animation or if the backgound need only be set once. 
+--
+-- processing docs: <https://processing.org/reference/background_.html>	
 background :: Col -> Draw
 background x = liftIO $ do
   clearColor $= glCol x
   G.clear [ColorBuffer]      
+
+-- | Clears the pixels within a buffer.
+--
+-- processing docs: <https://processing.org/reference/clear_.html>	
 
 clear :: Draw
 clear = liftIO $ do
@@ -45,18 +65,19 @@ clear = liftIO $ do
 
 ------------------------------------------------------
 
-greyCol :: Float -> Col
-greyCol x = Col x x x 1
-
+-- | Creates an RGB-color from three values. The values are from 0 to 255.
 rgb :: Float -> Float -> Float -> Col
 rgb r g b = rgba r g b 255
 
+-- | Creates a grey value out of single float value. The value is from 0 to 255.
 grey :: Float -> Col
 grey g = rgb g g g
 
+-- | Creates an RGB-color with transparency.
 rgba :: Float -> Float -> Float -> Float -> Col
 rgba r g b a = Col (r / 255) (g / 255) (b / 255) (a / 255)
 
+-- | Creates an grey-color with transparency.
 greya :: Float -> Float -> Col
 greya g a = rgba g g g a
 

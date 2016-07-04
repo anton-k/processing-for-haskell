@@ -8,9 +8,9 @@ module Graphics.Proc.Core.State(
 	getMousePosition, getLastPressedKey, getPressedModifiers,
 
 	-- * Random
-	NoiseDetails(..), Seed,
-	getRandomGen, getNoiseGen, getNoiseDetails, 
-	putRandomGen, putNoiseGen, putNoiseDetails,
+	NoiseDetail(..), Seed,
+	getRandomGen, getNoiseGen, getNoiseDetail, 
+	putRandomGen, putNoiseGen, putNoiseDetail,
 	putOctaves,
 
 	-- * Draw
@@ -69,13 +69,13 @@ getPressedModifiers = onInput $ fmap pressedModifiers get
 
 getRandomGen     = onRnd $ fmap rndRandomGen get
 getNoiseGen      = onRnd $ fmap rndNoiseGen  get
-getNoiseDetails  = onRnd $ fmap rndNoiseDetails get
+getNoiseDetail   = onRnd $ fmap rndNoiseDetail get
 
 putRandomGen     v = onRnd $ modify $ \x -> x { rndRandomGen = v }
 putNoiseGen      v = onRnd $ modify $ \x -> x { rndNoiseGen = v }
-putNoiseDetails  v = onRnd $ modify $ \x -> x { rndNoiseDetails = v }
+putNoiseDetail   v = onRnd $ modify $ \x -> x { rndNoiseDetail = v }
 
-putOctaves v = onRnd $ modify $ \x -> x { rndNoiseDetails = go (rndNoiseDetails x) v }
+putOctaves v = onRnd $ modify $ \x -> x { rndNoiseDetail = go (rndNoiseDetail x) v }
 	where go nd v = nd { noiseDetailsOctaves = v }
 
 ----------------------------------------
@@ -114,6 +114,9 @@ putFill value = onDraw $ modify $ \x -> x { drawFill = value }
 updateFrameCount :: Pio ()
 updateFrameCount = onFrame E.updateFrameCount
 
+-- | The system variable frameCount contains the number of frames that have been displayed since the program started. Inside setup() the value is 0, after the first iteration of draw it is 1, etc.
+-- 
+-- processing docs: <https://processing.org/reference/frameCount.html>
 frameCount :: Pio Int
 frameCount = onFrame $ fmap E.frameCount get
 
