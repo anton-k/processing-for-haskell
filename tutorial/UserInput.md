@@ -184,7 +184,7 @@ Let's draw a circle and let the user to move it with standard for old-school gam
 buttons `wasd`. `w` -- for up, `a` - go left, `s` -- go down and `d` -- go right:
 
 
-~~~
+~~~Haskell
 import Graphics.Proc
 
 main = runProc $ def 
