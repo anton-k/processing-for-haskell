@@ -71,9 +71,11 @@ module Graphics.Proc(
 	-- ** Mouse
 	mouse, mouseX, mouseY, 
 	relMouse, relMouseX, relMouseY,
+	MouseButton(..),
+	mouseButton,
 
 	-- ** Keyboard
-	Key(..), key, Modifiers(..), modifiers, 
+	Key(..), SpecialKey(..), key, Modifiers(..), modifiers, 
 
 	-- ** Files
 

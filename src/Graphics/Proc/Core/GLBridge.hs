@@ -1,5 +1,5 @@
 module Graphics.Proc.Core.GLBridge(
-  MouseButton(..), Modifiers(..), Key(..), KeyState(..), Position(..),
+  MouseButton(..), Modifiers(..), Key(..), KeyState(..), Position(..), SpecialKey(..),
   -- Font,
   Col(..), glCol,
   f2d, v2, p2v,

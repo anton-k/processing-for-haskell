@@ -1,6 +1,7 @@
 module Graphics.Proc.Lib.Input.Mouse(
 	mouse, mouseX, mouseY, 
-	relMouse, relMouseX, relMouseY
+	relMouse, relMouseX, relMouseY,
+	mouseButton
 ) where
 
 import Graphics.Proc.Core
@@ -39,3 +40,6 @@ relMouseY = do
 -- | Contains relative coordinates of the mouse as a vector.
 relMouse :: Pio P2
 relMouse = liftA2 (,) relMouseX relMouseY
+
+mouseButton :: Pio (Maybe MouseButton)
+mouseButton = getMouseButton

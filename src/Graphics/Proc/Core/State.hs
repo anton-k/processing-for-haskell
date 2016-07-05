@@ -5,7 +5,7 @@ module Graphics.Proc.Core.State(
 	-- * Input
 	MouseButton(..), Modifiers(..), Key(..), KeyState(..),
 	putKeyPress, putMouseButton, putPosition,
-	getMousePosition, getLastPressedKey, getPressedModifiers,
+	getMousePosition, getMouseButton, getLastPressedKey, getPressedModifiers, 
 
 	-- * Random
 	NoiseDetail(..), Seed,
@@ -63,6 +63,9 @@ getLastPressedKey   = onInput $ fmap lastPressedKey get
 
 getPressedModifiers :: Pio Modifiers
 getPressedModifiers = onInput $ fmap pressedModifiers get
+
+getMouseButton :: Pio (Maybe MouseButton)
+getMouseButton = onInput $ fmap pressedButton get
 
 ----------------------------------------
 -- random
