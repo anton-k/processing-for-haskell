@@ -1,5 +1,5 @@
 
-The first steps. Drawing on the screen
+The first steps. The structure of animation
 =========================================
 
 The animation is some evolving state that we can render on the screen.
@@ -56,20 +56,20 @@ In setup we set the sizes of the window and return the initial state.
 Our picture is static so the state is not going to change that is why we return 
 a value of the unit type. It has only one value.
 
-The function `draw` clears the pictrue with black color (`grey 0`), sets the
+The function `draw` clears the picture with black color (`grey 0`), sets the
 current color to white (`fill (grey 255)`) and draws a circle in the center of the screen.
 
 The function `update` doesn't change anything it just passes the state around.
 
 We are ready to render our static animation. To do that we set the three callbacks 
-and pass tem to the function `runProc`.
+and pass them to the function `runProc`.
 
 ~~~Haskell
 runProc :: Proc -> IO ()
 ~~~
 
-The datatype `Proc` contains all callback functions. There are many callbacks but right now 
-we can set only three of them. We use the default value `def` and redefine the fileds we need:
+The data type `Proc` contains all callback functions. There are many callbacks but right now 
+we can set only three of them. We use the default value `def` and redefine the fields we need:
 
 ~~~Haskell
 main = runProc $ def 
@@ -84,7 +84,7 @@ Save the code to file and execute runhaskell on it:
 > runhaskell Static.hs
 ~~~
 
-We have a nice picture of the lonley star. Let's create a planet that spins around our Sun!
+We have a nice picture of the lonely star. Let's create a planet that spins around our Sun!
 The planet has parameters:
 
 ~~~Haskell
@@ -110,7 +110,7 @@ drawPlanet p = local $ do
 
 We draw the planet at transformed coordinates. First we translate the coordinates
 so that the point (0, 0) corresponds to the center of the screen. Then we rotate
-the space by the planet's angle. We are going to update the angle of roatation so that
+the space by the planet's angle. We are going to update the angle of rotation so that
 the planet could move around the Sun. Let's implement this function:
 
 ~~~Haskell
@@ -142,11 +142,17 @@ setup = do
 
 draw xs = do
 	background (grey 0)
-	fill (grey 255)
-	circle 17 center	
+	drawSun
 	mapM_ drawPlanet xs
 
 update xs = return $ fmap updatePlanet xs
+
+-------------------------------------
+-- sun
+
+drawSun = do
+	fill (grey 255)
+	circle 17 center	
 
 -------------------------------------
 -- planets
@@ -180,6 +186,10 @@ main = runProc $ def
 	, procUpdate = update }
 ~~~
 
-Exercise: try to add satelites.
+We use standard Haskell functions to update all planets in the list.
+The `mapM_` to draw planets and accumulate the effects and `fmap`
+to transform all elements in the list.
+
+Exercise: try to add satellites.
 
 

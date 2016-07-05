@@ -10,11 +10,17 @@ setup = do
 
 draw xs = do
 	background (grey 0)
-	fill (grey 255)
-	circle 17 center	
+	drawSun
 	mapM_ drawPlanet xs
 
 update xs = return $ fmap updatePlanet xs
+
+-------------------------------------
+-- sun
+
+drawSun = do
+	fill (grey 255)
+	circle 17 center	
 
 -------------------------------------
 -- planets
