@@ -109,7 +109,7 @@ module Graphics.Proc(
 	
 	-- * Color		
     fill, noFill, stroke, noStroke, strokeFill,
-    rgb, rgba, grey, greya, 
+    rgb, rgba, grey, greya, setAlpha,
 	background, clear,
 
 	white, black, navy, blue, aqua, teal, olive, green,
@@ -153,7 +153,7 @@ module Graphics.Proc(
 	radians, degrees, e, erad,
 
 	-- ** Random
-	randomSeed, random, random2, randomP2, randomCol, 
+	randomSeed, random, random2, randomP2, randomCol, randomCola,
 	randomGaussian,
 
 	-- *** Perlin noise

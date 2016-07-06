@@ -4,7 +4,7 @@ module Graphics.Proc.Lib.Color(
 	background, clear,
 	strokeFill,
 
-	rgb, grey, rgba, greya,
+	rgb, grey, rgba, greya, setAlpha,
 
 	white, black, navy, blue, aqua, teal, olive, green,
 	lime, yellow, orange, red, maroon, fushsia, purple,
