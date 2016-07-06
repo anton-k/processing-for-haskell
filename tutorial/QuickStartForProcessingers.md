@@ -1,4 +1,4 @@
-Guide 
+Quick start guide
 --------------------------------------------------------------
 
 If you are familiar with processing you probably know that
