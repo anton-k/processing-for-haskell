@@ -10,7 +10,7 @@ name:                processing-for-haskell
 -- PVP summary:      +-+------- breaking API changes
 --                   | | +----- non-breaking API additions
 --                   | | | +--- code changes with no API change
-version:             0.1.0.0
+version:             0.1.0.1
 
 -- A short (one-line) description of the package.
 synopsis:           Computer graphics for kids and artists with Processing implemented in Haskell. 
@@ -48,6 +48,17 @@ extra-source-files:  ChangeLog.md
 
 -- Constraint on the version of Cabal needed to build this package.
 cabal-version:       >=1.10
+
+Stability:     Experimental
+
+Tested-With:   GHC==8.0.1
+
+Homepage:        https://github.com/anton-k/processing-for-haskell
+Bug-Reports:     https://github.com/anton-k/processing-for-haskell/issues
+
+Source-repository head
+    Type: git
+    Location: https://github.com/anton-k/processing-for-haskell
 
 
 library
