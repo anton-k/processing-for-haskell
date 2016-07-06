@@ -29,7 +29,7 @@ You can install it from hackage.
 
 If you are familiar with processing you can read:
 
-* [Quick start guide for Processibgers](https://github.com/anton-k/processing-for-haskell/blob/master/tutorial/QuickStartForProcessingers.md)
+* [Quick start guide for Processigers](https://github.com/anton-k/processing-for-haskell/blob/master/tutorial/QuickStartForProcessingers.md)
 
 Also you can read more detailed tutorial. The code examples for tutorial can be found [here](https://github.com/anton-k/processing-for-haskell/tree/master/tutorial/code):
 

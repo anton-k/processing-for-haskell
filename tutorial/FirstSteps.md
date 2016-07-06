@@ -12,7 +12,7 @@ So there are three main functions:
 
 * `update` -- it calculates the next state out of current one.
 
-The function have following signatures:
+The functions have following signatures:
 
 ~~~Haskell
 setup  :: Pio st
@@ -120,7 +120,7 @@ updatePlanet p = p { planetAngle = angle + speed }
 		speed = planetSpeed p
 ~~~
 
-We an define the initial state:
+We can define the initial state:
 
 ~~~Haskell
 initPlanets = [Planet green 10 0 0.0013 85, Planet red 8 0 0.001 155]

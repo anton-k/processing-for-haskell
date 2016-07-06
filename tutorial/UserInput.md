@@ -67,7 +67,7 @@ main = runProc $ def
 	, procMousePressed = mousePressed }
 ~~~
 
-The full code you can find in the directory code, see the `PlanetClick.hs`.
+The full code you can find in the directory code, see the [`PlanetClick.hs`](https://github.com/anton-k/processing-for-haskell/blob/master/tutorial/code/PlanetClick.hs).
 
 Mouse motion
 --------------------------------
