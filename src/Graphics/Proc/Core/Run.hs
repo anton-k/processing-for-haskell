@@ -23,13 +23,13 @@ type Update s = s -> Pio s
 type Draw = Pio ()
 
 -- | It holds all processing standard callbacks. 
--- With itwe can set the setup, draw, and update functions.
+-- With it we can set the setup, draw, and update functions.
 -- Here we can specify how to react on user-input.
 --
 -- All functions update the program state. They take it in as an argument and produce as result.
--- In Haskell we can not manipulate globl variables with uch ease as Procesing provides.
+-- In Haskell we can not manipulate global variables with such ease as Processing provides.
 -- So we have to find out another way to update the state. The natural way for Haskell is to keep
--- the thing as explicit as possible. That leeds to the following descisions:
+-- the things as explicit as possible. That leads to the following decisions:
 --
 -- * @setup@ returns the initial state.
 --

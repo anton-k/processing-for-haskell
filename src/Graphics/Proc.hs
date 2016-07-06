@@ -17,7 +17,7 @@
 -- > 
 -- > update x = return (x + 0.1)
 -- > 
--- We can find the quistart guide and lots of examples in the project repository on github <https://github.com/anton-k/processing-for-haskell> (see the directory @examples@).
+-- We can find the quickstart guide and lots of examples in the project repository on github <https://github.com/anton-k/processing-for-haskell> (see the directory @examples@).
 module Graphics.Proc(
 	-- * Structure
 	Proc(..), runProc,
