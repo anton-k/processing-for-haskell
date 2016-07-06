@@ -34,4 +34,4 @@ draw x = do
   fill (grey 0)
   rect (-dim/2, -dim/2) (dim, dim)
 
-update x = return (if (x > width + dim) then (-dim) else x + 0.1)
+update x = return (if (x > width + dim) then (-dim) else x + 1)

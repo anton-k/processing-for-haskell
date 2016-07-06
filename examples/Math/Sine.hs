@@ -29,4 +29,4 @@ draw angle = do
     d2 = 0.5 * (10 + (sin(angle + pi/2) * diameter/2) + diameter/2)
     d3 = 0.5 * (10 + (sin(angle + pi) * diameter/2) + diameter/2)
 
-update angle = return (angle + 0.004)
+update angle = return (angle + 0.03)

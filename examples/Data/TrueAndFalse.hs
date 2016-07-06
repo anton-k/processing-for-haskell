@@ -20,6 +20,7 @@ middle = width / 2
 
 setup = do    
   size (width, height)
+  background (grey 0)
   stroke (grey 255)  
 
 draw () = do

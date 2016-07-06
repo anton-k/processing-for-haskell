@@ -53,4 +53,4 @@ update (xpos1, xpos2, xpos3, xpos4) = do
             if (value > width) 
               then -thin 
               else value
-    coeff = 0.15              
+    coeff = 0.6

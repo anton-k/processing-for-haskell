@@ -27,7 +27,7 @@ draw theta = do
   background (grey 0)
   renderWave (calcWave theta)  
 
-update theta = return (theta + 0.01)
+update theta = return (theta + 0.03)
 
 calcWave theta = take npoints $ fmap (\x -> amplitude * sin (x + theta)) [0, dx ..]
 

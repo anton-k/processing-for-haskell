@@ -16,7 +16,7 @@ width  = 640
 height = 360
 
 center = 0.5 *^ (width, height)
-easing = 0.0065
+easing = 0.05
 
 setup = do
   size (width, height)

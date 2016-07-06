@@ -2,6 +2,8 @@
 
 -- Characters Strings.
 
+-- NOT IMPLEMENTED
+
 -- The character datatype, abbreviated as char, stores letters and 
 -- symbols in the Unicode format, a coding system developed to support 
 -- a variety of world languages. Characters are distinguished from 

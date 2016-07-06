@@ -17,7 +17,7 @@ height = 360
 
 sizes = (width, height)
 center = 0.5 *^ sizes
-easing = 0.0065
+easing = 0.06
 edge   = 100
 radius = 24
 inner  = edge + radius

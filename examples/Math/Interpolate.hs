@@ -27,7 +27,7 @@ draw pos = do
 
 update pos = do
   m <- mouse
-  return (lerp pos m 0.0065)
+  return (lerp pos m 0.05)
 
 -----------------------------------------
 -- Side note

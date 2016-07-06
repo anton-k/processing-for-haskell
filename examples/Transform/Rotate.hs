@@ -39,7 +39,7 @@ draw (angle, _) = do
 update (angle, jitter) = do
 	s <- second
 	jitter1 <- if (s `mod` 2 == 0) 
-				then random2 (-0.1, 0.1)
+				then random2 (-0.05, 0.05)
 				else return jitter	
 	return (angle + jitter1, jitter1)
 	

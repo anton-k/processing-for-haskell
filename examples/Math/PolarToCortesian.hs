@@ -12,7 +12,7 @@ height = 360
 center = 0.5 *^ (width, height)
 
 radius = height * 0.45
-thetaAcc = 0.000001
+thetaAcc = 0.0001
 
 setup = do
   size (width, height)
