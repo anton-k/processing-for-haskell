@@ -1,17 +1,18 @@
 import Graphics.Proc
 
-main = runProc $ def 
+main = runProc $ def
 	{ procSetup  = setup
 	, procDraw   = draw }
 
 setup = do
-	size (400, 400)	
+	size (400, 400)
 
 draw () = do
+	background white
 	noStroke
 	fill (rgb 255 145 23)
 	ellipse (50, 50) (40, 70)
-	
+
 	noStroke
 	fill (grey 74)
 	rect (150, 50) (60, 90)
@@ -40,5 +41,7 @@ draw () = do
 	point (350, 230)
 
 	linePath [(10, 10), (10, 390), (390, 390)]
+	camera2 (40, 40) 1000 1.2
+
 
 

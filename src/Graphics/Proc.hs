@@ -3,25 +3,25 @@
 -- An example:
 --
 -- > import Graphics.Proc
--- > 
+-- >
 -- > main = runProc $ def { procSetup = setup, procDraw = draw, procUpdate = update }
--- > 
+-- >
 -- > setup = do
 -- > 	size (300, 300)
 -- > 	return 0
--- > 
--- > draw x = do	
+-- >
+-- > draw x = do
 -- > 	background (grey 255)
 -- > 	fill (rgb 0 255 0)
 -- > 	circle 20 (150 + 50 * sin x, 150)
--- > 
+-- >
 -- > update x = return (x + 0.1)
--- > 
+-- >
 -- We can find the quickstart guide and lots of examples in the project repository on github <https://github.com/anton-k/processing-for-haskell> (see the directory @examples@).
 module Graphics.Proc(
 	-- * Structure
 	Proc(..), runProc,
-	
+
 	-- * Types
 	Pio, Draw, Update, TimeInterval, Col(..), P2, P3,
 
@@ -36,17 +36,17 @@ module Graphics.Proc(
 
 	-- ** Conversion
 	float, int,
-	
+
 	-- ** String Functions
 	-- | We can use standard Haskell string functions.
 
 	-- ** Array Functions
 	--  | We can use Haskell arrays.
-	
+
 	-- * Control
 	-- | We can use plain old Bool datatype.
 
-	
+
 	-- * Shape
 
 	-- ** 2D Primitives
@@ -69,45 +69,46 @@ module Graphics.Proc(
 	-- * Input
 
 	-- ** Mouse
-	mouse, mouseX, mouseY, 
+	mouse, mouseX, mouseY,
 	relMouse, relMouseX, relMouseY,
 	MouseButton(..),
 	mouseButton,
 
 	-- ** Keyboard
-	Key(..), SpecialKey(..), key, Modifiers(..), modifiers, 
+	Key(..), SpecialKey(..), key, Modifiers(..), modifiers,
 
 	-- ** Files
 
 	-- ** Time & Date
 	year, month, day, hour, minute, second, millis, utcHour,
 
-	-- * Output	
+	-- * Output
 
 	-- ** Text Area
 	println,
 
 	-- ** Image
-	
+
 	-- ** Files
-	
+
 	-- * Transform
-	translate, 
-	rotate, rotateX, rotateY, rotateZ, 
-	scale, 
-	resetMatrix, local, 
-	applyMatrix, 
+	translate,
+	rotate, rotateX, rotateY, rotateZ,
+	scale,
+	resetMatrix, local,
+	applyMatrix,
 	shearX, shearY,
 
 	-- * Lights
-	
+
 	-- * Camera
+	camera, camera2,
 
 	-- ** Coordinates
 
-    -- ** Material Properties  
-	
-	-- * Color		
+    -- ** Material Properties
+
+	-- * Color
     fill, noFill, stroke, noStroke, strokeFill,
     rgb, rgba, grey, greya, setAlpha,
 	background, clear,
@@ -117,7 +118,7 @@ module Graphics.Proc(
 	gray, silver,
 
 
-	-- * Image	
+	-- * Image
 
 	-- ** Loading & Displaying
 
@@ -136,15 +137,15 @@ module Graphics.Proc(
 
 	-- ** Attributes
 	-- textSize,
-	
+
 	-- ** Metrics
 
 	-- * Math
 
 	-- ** Operators
-	
+
 	-- ** Bitwise Operators
-	
+
 	-- ** Calculation
 	remap, FloatInterval,
 	constrain, constrain2,
@@ -161,7 +162,7 @@ module Graphics.Proc(
   	--
   	-- processing docs: <https://processing.org/reference/noise_.html>
 	NoiseDetail(..), noiseDetail, noiseOctaves, noiseSeed, noise1, noise2, noise3,
-	
+
 	-- * Misc
 	onCircle, onLine, uon,
 
@@ -171,13 +172,13 @@ module Graphics.Proc(
 	-- | Useful standard functions
 	module Data.VectorSpace,
 	module Data.AffineSpace,
-	module Data.Cross,	
+	module Data.Cross,
     module Data.NumInstances,
 	module Data.Default,
 	module Data.Monoid,
 	module Control.Monad,
 	module Control.Monad.IO.Class,
-	module Control.Applicative	
+	module Control.Applicative
 ) where
 
 import Data.Default
