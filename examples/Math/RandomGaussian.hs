@@ -1,12 +1,12 @@
 -- original code: https://processing.org/examples/randomgaussian.html
 
 -- Random Gaussian.
--- 
+--
 -- This sketch draws ellipses with x and y locations tied to a gaussian distribution of random numbers.
 import Graphics.Proc
 
 main = runProc $ def { procSetup = setup, procDraw = draw }
- 
+
 width  = 640
 height = 360
 
@@ -15,16 +15,16 @@ steps = totalPts + 1
 dx = width / steps
 
 setup = do
-  size (width, height)
+  size (P2 width height)
   background (grey 0)
 
-draw () = do	
+draw () = do
 	drawCircle =<< getRnd
 
 drawCircle x = do
 	noStroke
-	fill (greya 255 10)	
-	ellipse (x, height/2) (32, 32)
+	fill (greya 255 10)
+	ellipse (P2 x (height/2)) (P2 32 32)
 
 getRnd = do
 	value <- randomGaussian

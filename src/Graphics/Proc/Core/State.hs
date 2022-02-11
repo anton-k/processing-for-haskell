@@ -1,40 +1,45 @@
 module Graphics.Proc.Core.State(
-	Pio(..), runPio, 
-  	GlobalState(..), defGlobalState,
+  Pio(..), runPio,
+    GlobalState(..), defGlobalState,
 
-	-- * Input
-	MouseButton(..), Modifiers(..), Key(..), KeyState(..),
-	putKeyPress, putMouseButton, putPosition,
-	getMousePosition, getMouseButton, getLastPressedKey, getPressedModifiers, 
+  -- * Input
+  MouseButton(..), Modifiers(..), Key(..), KeyState(..),
+  putKeyPress, putMouseButton, putPosition,
+  getMousePosition, getMouseButton, getLastPressedKey, getPressedModifiers,
 
-	-- * Random
-	NoiseDetail(..), Seed,
-	getRandomGen, getNoiseGen, getNoiseDetail, 
-	putRandomGen, putNoiseGen, putNoiseDetail,
-	putOctaves,
+  -- * Random
+  NoiseDetail(..), Seed,
+  getRandomGen, getNoiseGen, getNoiseDetail,
+  putRandomGen, putNoiseGen, putNoiseDetail,
+  putOctaves,
 
-	-- * Draw
-	DrawState(..),
-    EllipseMode, RectMode, DrawMode(..), 
+  -- * Draw
+  DrawState(..),
+    EllipseMode, RectMode, DrawMode(..),
     StrokeCap(..), StrokeJoin(..),
 
     getStroke, getFill, getEllipseMode, getRectMode,
     putEllipseMode, putStroke, putFill, putRectMode,
 
-	-- * Font
+  -- * Font
 
-	-- * Frame
-	LoopMode(..), 
-    updateFrameCount, frameCount, 
-    getFrameRate, putFrameRate, 
-    getLoopMode, putLoopMode, 
+  -- * Frame
+  LoopMode(..),
+    updateFrameCount, frameCount,
+    getFrameRate, putFrameRate,
+    getLoopMode, putLoopMode,
 
-	-- * Time
-	initTimeState, TimeInterval, getDuration, getStartTime
+  -- * Time
+  initTimeState, TimeInterval, getDuration, getStartTime,
+
+  -- 3D primitives
+  SphereRes(..), RawSphereRes(..), toRawSphereRes,
+  module X,
 ) where
 
 import Data.Time.Clock
-import Control.Monad.Trans.State.Strict
+import Control.Monad.IO.Class     as X
+import Control.Monad.State.Strict as X
 
 import Graphics.Proc.Core.State.Pio
 import Graphics.Proc.Core.GLBridge
@@ -53,10 +58,10 @@ putMouseButton mb = onInput $ modify $ \x -> x { pressedButton = mb }
 
 putPosition :: Position -> Pio ()
 putPosition pos = onInput $ modify $ \x -> x { mousePosition = fromPosition pos }
-	where fromPosition (Position x y) = (fromEnum x, fromEnum y)
+  where fromPosition (Position x y) = (fromEnum x, fromEnum y)
 
 getMousePosition :: Pio P2
-getMousePosition = onInput $ fmap ((\(x, y) -> (fromIntegral x, fromIntegral y)) . mousePosition) get
+getMousePosition = onInput $ fmap ((\(x, y) -> P2 (fromIntegral x) (fromIntegral y)) . mousePosition) get
 
 getLastPressedKey :: Pio Key
 getLastPressedKey   = onInput $ fmap lastPressedKey get
@@ -79,7 +84,7 @@ putNoiseGen      v = onRnd $ modify $ \x -> x { rndNoiseGen = v }
 putNoiseDetail   v = onRnd $ modify $ \x -> x { rndNoiseDetail = v }
 
 putOctaves v = onRnd $ modify $ \x -> x { rndNoiseDetail = go (rndNoiseDetail x) v }
-	where go nd v = nd { noiseDetailsOctaves = v }
+  where go nd v = nd { noiseDetailsOctaves = v }
 
 ----------------------------------------
 -- draw
@@ -118,7 +123,7 @@ updateFrameCount :: Pio ()
 updateFrameCount = onFrame E.updateFrameCount
 
 -- | The system variable frameCount contains the number of frames that have been displayed since the program started. Inside setup() the value is 0, after the first iteration of draw it is 1, etc.
--- 
+--
 -- processing docs: <https://processing.org/reference/frameCount.html>
 frameCount :: Pio Int
 frameCount = onFrame $ fmap E.frameCount get

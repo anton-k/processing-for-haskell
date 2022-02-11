@@ -4,8 +4,8 @@
 
 -- Functions.
 
--- The drawTarget() function makes it easy to draw many distinct targets. 
--- Each call to drawTarget() specifies the position, 
+-- The drawTarget() function makes it easy to draw many distinct targets.
+-- Each call to drawTarget() specifies the position,
 -- size, and number of rings for each target.
 import Graphics.Proc
 
@@ -15,8 +15,8 @@ width  = 640
 height = 360
 
 setup = do
-  size (width, height)  
-  noStroke  
+  size (P2 width height)
+  noStroke
 
 draw ()  = do
   background (grey 51)
@@ -27,7 +27,7 @@ draw ()  = do
 drawTarget xloc yloc size num = do
   forM_ [0, 1 .. num] $ \i -> do
     fill (grey (i*grayvalues))
-    ellipse (xloc, yloc) (size - i*steps, size - i*steps)
+    ellipse (P2 xloc yloc) (P2 (size - i*steps) (size - i*steps))
   where
     grayvalues = 255/num
     steps = size/num

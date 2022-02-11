@@ -1,7 +1,7 @@
 -- original code: https://processing.org/examples/sinewave.html
 --
 -- Sine Wave by Daniel Shiffman.
--- 
+--
 -- Render a simple sine wave.
 
 import Graphics.Proc
@@ -19,13 +19,13 @@ dx = (2 * pi / period) * xspacing   -- Value for incrementing X, a function of p
 npoints = int $ w / xspacing
 
 setup = do
-  size (width, height)
+  size (P2 width height)
   return theta
   where theta = 0.0       -- Start angle at 0
 
 draw theta = do
   background (grey 0)
-  renderWave (calcWave theta)  
+  renderWave (calcWave theta)
 
 update theta = return (theta + 0.03)
 
@@ -35,4 +35,4 @@ renderWave ys = do
   noStroke
   fill (grey 255)
   forM_ (zip [0 .. npoints] ys) $ \(x, y) -> do
-    ellipse (float x * xspacing, height/2 + y) 16
+    ellipse (P2 (float x * xspacing) (height/2 + y)) 16

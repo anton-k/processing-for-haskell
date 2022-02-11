@@ -1,10 +1,8 @@
 module Graphics.Proc.Lib.Math(
-	module Graphics.Proc.Lib.Math.Random,
-	module Graphics.Proc.Lib.Math.Calculation,
-	module Graphics.Proc.Lib.Math.Trigonometry
+  module X
 ) where
 
-import Graphics.Proc.Lib.Math.Random
-import Graphics.Proc.Lib.Math.Calculation
-import Graphics.Proc.Lib.Math.Trigonometry
+import Graphics.Proc.Lib.Math.Random        as X
+import Graphics.Proc.Lib.Math.Calculation   as X
+import Graphics.Proc.Lib.Math.Trigonometry  as X
 

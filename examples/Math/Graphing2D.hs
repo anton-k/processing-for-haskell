@@ -1,11 +1,11 @@
 -- original code: https://processing.org/examples/graphing2dequation.html
 
 -- Graphing 2D Equations by Daniel Shiffman.
--- 
+--
 -- Graphics the following equation: sin(n*cos(r) + 5*theta) where n is a function of horizontal mouse location.
 
 -- requires Imagr drawing capabilities which are not implemented.
- 
+
 void setup() {
   size(640, 360);
 }

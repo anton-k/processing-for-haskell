@@ -1,16 +1,10 @@
 module Graphics.Proc.Core.State.Elements(
-	module Graphics.Proc.Core.State.Elements.Input,
-	module Graphics.Proc.Core.State.Elements.Rnd,
-	module Graphics.Proc.Core.State.Elements.Draw,
-	module Graphics.Proc.Core.State.Elements.Font,
-	module Graphics.Proc.Core.State.Elements.Frame,
-	module Graphics.Proc.Core.State.Elements.Time
-
+  module X
 ) where
 
-import Graphics.Proc.Core.State.Elements.Input
-import Graphics.Proc.Core.State.Elements.Rnd
-import Graphics.Proc.Core.State.Elements.Draw
-import Graphics.Proc.Core.State.Elements.Font
-import Graphics.Proc.Core.State.Elements.Frame
-import Graphics.Proc.Core.State.Elements.Time
+import Graphics.Proc.Core.State.Elements.Input  as X
+import Graphics.Proc.Core.State.Elements.Rnd    as X
+import Graphics.Proc.Core.State.Elements.Draw   as X
+import Graphics.Proc.Core.State.Elements.Font   as X
+import Graphics.Proc.Core.State.Elements.Frame  as X
+import Graphics.Proc.Core.State.Elements.Time   as X

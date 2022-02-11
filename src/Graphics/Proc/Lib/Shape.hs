@@ -1,9 +1,8 @@
 module Graphics.Proc.Lib.Shape(
-	module Graphics.Proc.Lib.Shape.Primitive2D,
-	module Graphics.Proc.Lib.Shape.Curve,
-	module Graphics.Proc.Lib.Shape.Attribute
+  module X
 ) where
 
-import Graphics.Proc.Lib.Shape.Primitive2D
-import Graphics.Proc.Lib.Shape.Curve
-import Graphics.Proc.Lib.Shape.Attribute
+import Graphics.Proc.Lib.Shape.Primitive2D as X
+import Graphics.Proc.Lib.Shape.Primitive3D as X
+import Graphics.Proc.Lib.Shape.Curve       as X
+import Graphics.Proc.Lib.Shape.Attribute   as X

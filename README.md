@@ -9,14 +9,6 @@ Well, But actually it...
 ... implements a **subset** of Processing Language in Haskell. So ...
 
 
-### The project needs your help
-
-The Processing being a small language implements some  tons of
-magic with OpenGL  under the hood. There are really big implementations
-of graphics primitives. I can not finish this thing all alone.
-So if you are really interested in seeing the package finished.
-If you want all features of Processing be implemented please **do** contribute!
-
 ### How to install
 
 You can install it from hackage.
@@ -60,3 +52,12 @@ There are many examples to try out at the [examples](https://github.com/anton-k/
 * Functions for rendering of complex 2D shapes (polygons with holes)
 
 * Should check for perlin-noise implementation.
+
+### The project needs your help
+
+The Processing being a small language implements some  tons of
+magic with OpenGL  under the hood. There are really great implementations
+of graphics primitives. I can not finish this thing all alone.
+So if you are really interested in seeing the package finished.
+If you want all features of Processing be implemented please **do** contribute!
+

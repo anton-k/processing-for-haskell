@@ -1,29 +1,29 @@
 -- original code: https://processing.org/examples/interpolate.html
 
 -- Linear Interpolation.
--- 
--- Move the mouse across the screen and the symbol will follow. 
--- Between drawing each frame of the animation, the ellipse moves 
--- part of the distance (0.05) from its current position toward 
--- the cursor using the lerp() function * This is the same as 
+--
+-- Move the mouse across the screen and the symbol will follow.
+-- Between drawing each frame of the animation, the ellipse moves
+-- part of the distance (0.05) from its current position toward
+-- the cursor using the lerp() function * This is the same as
 -- the Easing under input only with lerp() instead.
 import Graphics.Proc
 
 main = runProc $ def { procSetup = setup, procDraw = draw, procUpdate = update }
- 
+
 width  = 640
 height = 360
-center = 0.5 *^ (width, height)
+center = 0.5 *^ (P2 width height)
 
 setup = do
-  size (width, height)
+  size (P2 width height)
   noStroke
   return center
 
 draw pos = do
   background (grey 51)
   fill (grey 255)
-  ellipse pos 66  
+  ellipse pos 66
 
 update pos = do
   m <- mouse

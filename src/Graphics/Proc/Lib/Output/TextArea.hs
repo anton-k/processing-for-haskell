@@ -1,5 +1,5 @@
 module Graphics.Proc.Lib.Output.TextArea(
-	println
+  println
 ) where
 
 import Graphics.Proc.Core

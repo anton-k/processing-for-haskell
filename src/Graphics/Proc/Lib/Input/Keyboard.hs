@@ -1,8 +1,8 @@
 module Graphics.Proc.Lib.Input.Keyboard(
-	key, modifiers
+  key, modifiers
 ) where
 
-import Graphics.Proc.Core	
+import Graphics.Proc.Core
 
 -- | Returns last pressed key.
 --

@@ -1,69 +1,71 @@
 module Graphics.Proc.Lib.Color(
-	stroke, noStroke,
-	fill, noFill,
-	background, clear,
-	strokeFill,
+  stroke, noStroke,
+  fill, noFill,
+  background, clear,
+  strokeFill,
 
-	rgb, grey, rgba, greya, setAlpha,
+  rgb, grey, rgba, greya, setAlpha,
+  hsv, hsva,
 
-	white, black, navy, blue, aqua, teal, olive, green,
-	lime, yellow, orange, red, maroon, fushsia, purple,
-	gray, silver
+  white, black, navy, blue, aqua, teal, olive, green,
+  lime, yellow, orange, red, maroon, fushsia, purple,
+  gray, silver
 ) where
 
-import Control.Monad.Trans.State.Strict
+import Control.Monad.State.Strict
 import Graphics.Rendering.OpenGL hiding(clear)
 import qualified Graphics.Rendering.OpenGL as G
+import qualified Data.Fixed as F
 
 import Graphics.Proc.Core
 
--- | Sets the color used to draw lines and borders around shapes. 
+-- | Sets the color used to draw lines and borders around shapes.
 --
--- processing docs: <https://processing.org/reference/stroke_.html>	
+-- processing docs: <https://processing.org/reference/stroke_.html>
 stroke :: Col -> Draw
 stroke = putStroke . Just
 
 -- | Disables drawing the stroke (outline). If both noStroke() and noFill() are called, nothing will be drawn to the screen
--- 
--- processing docs: <https://processing.org/reference/noStroke_.html>	
+--
+-- processing docs: <https://processing.org/reference/noStroke_.html>
 noStroke :: Draw
 noStroke = putStroke Nothing
 
--- | Sets the color used to fill shapes. For example, if you run @fill (rgb 204 102 0)@, all subsequent shapes will be filled with orange. 
+-- | Sets the color used to fill shapes. For example, if you run @fill (rgb 204 102 0)@, all subsequent shapes will be filled with orange.
 --
--- processing docs: <https://processing.org/reference/fill_.html>	
+-- processing docs: <https://processing.org/reference/fill_.html>
 fill :: Col -> Draw
 fill = putFill . Just
 
--- | Disables filling geometry. If both noStroke() and noFill() are called, nothing will be drawn to the screen. 
--- 
--- processing docs: <https://processing.org/reference/noFill_.html>	
+-- | Disables filling geometry. If both noStroke() and noFill() are called, nothing will be drawn to the screen.
+--
+-- processing docs: <https://processing.org/reference/noFill_.html>
 noFill :: Draw
 noFill = putFill Nothing
 
 -- | Sets stroke and fill to the same color.
 strokeFill :: Col -> Draw
 strokeFill col = do
-    stroke col 
+    stroke col
     fill col
 
 ------------------------------------------------------
 
--- | The background() function sets the color used for the background of the Processing window. The default background is light gray. This function is typically used within draw() to clear the display window at the beginning of each frame, but it can be used inside setup() to set the background on the first frame of animation or if the backgound need only be set once. 
+-- | The background() function sets the color used for the background of the Processing window. The default background is light gray. This function is typically used within draw() to clear the display window at the beginning of each frame, but it can be used inside setup() to set the background on the first frame of animation or if the backgound need only be set once.
 --
--- processing docs: <https://processing.org/reference/background_.html>	
+-- processing docs: <https://processing.org/reference/background_.html>
 background :: Col -> Draw
 background x = liftIO $ do
   clearColor $= glCol x
-  G.clear [ColorBuffer]      
+  G.clear [ColorBuffer]
 
 -- | Clears the pixels within a buffer.
 --
--- processing docs: <https://processing.org/reference/clear_.html>	
+-- processing docs: <https://processing.org/reference/clear_.html>
 
 clear :: Draw
 clear = liftIO $ do
-	G.clear [ColorBuffer]      
+  G.clear [ColorBuffer]
 
 ------------------------------------------------------
 
@@ -84,9 +86,40 @@ greya :: Float -> Float -> Col
 greya g a = rgba g g g a
 
 ------------------------------------------------------
+-- HSV color model
+
+-- |
+-- * Hue (H) is 0 to 360
+-- * Saturation (S) is 0 to 1
+-- * Value (V) or brightness is 0 to 1
+hsv :: Float -> Float -> Float -> Col
+hsv h s v = rgb r g b
+  where
+    !c = v * s
+    !x = c * (1 - abs (((h / 60) `F.mod'` 2) - 1))
+    !m = v - c
+
+    (r', g', b')
+      | hIn   0  60 = (c, x, 0)
+      | hIn  60 120 = (x, c, 0)
+      | hIn 120 180 = (0, c, x)
+      | hIn 180 240 = (0, x, c)
+      | hIn 240 300 = (x, 0, c)
+      | otherwise   = (c, 0, x)
+
+    hIn a b = a <= h && h < b
+    fromRel a = (a + m) * 255
+    !r = fromRel r'
+    !g = fromRel g'
+    !b = fromRel b'
+
+hsva :: Float -> Float -> Float -> Float -> Col
+hsva h s v a = setAlpha a $ hsv h s v
+
+------------------------------------------------------
 
 setAlpha :: Float -> Col -> Col
-setAlpha x (Col r g b _) = Col r g b (x)
+setAlpha x (Col r g b _) = Col r g b x
 
 -- | White color.
 white :: Col
@@ -129,7 +162,7 @@ yellow :: Col
 yellow = rgb 255 220 0
 
 -- | Orange color
-orange :: Col 
+orange :: Col
 orange = rgb 255 33 27
 
 -- | Red color

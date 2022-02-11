@@ -1,16 +1,18 @@
 {-# Language DeriveFunctor, GeneralizedNewtypeDeriving #-}
 -- | The Processing IO-monad.
 module Graphics.Proc.Core.State.Pio(
-  Pio(..), runPio, 
-  GlobalState(..), defGlobalState,
+  Pio(..), runPio,
+  GlobalState(..), defGlobalState, SphereRes(..), RawSphereRes(..), toRawSphereRes,
 
-  onInput, onRnd, onDraw, onFont, onFrame, onTime, onTimeIO
+  onInput, onRnd, onDraw, onFont, onFrame, onTime, onTimeIO,
+  module X
 ) where
 
 import Data.Default
 import Data.IORef
-import Control.Monad.IO.Class
-import Control.Monad.Trans.State.Strict
+import Control.Monad.IO.Class     as X
+import Control.Monad.State.Strict as X
+import GHC.Int
 
 import Graphics.Proc.Core.State.Elements
 
@@ -22,7 +24,7 @@ import Graphics.Proc.Core.State.Elements
 --
 -- > text <- liftIO $ readFile filename
 newtype Pio a = Pio { unPio :: StateT GlobalState IO a }
-  deriving (Functor, Applicative, Monad, MonadIO)
+  deriving (Functor, Applicative, Monad, MonadIO, MonadState GlobalState)
 
 runPio :: Pio a -> GlobalState -> IO (a, GlobalState)
 runPio (Pio x) st = runStateT x st
@@ -32,7 +34,7 @@ readPio selector = readStatePio (selector . globalInputState)
 
 readStatePio :: (GlobalState -> a) -> Pio a
 readStatePio selector = Pio $ do
-  st <- get  
+  st <- get
   return $ selector st
 
 modifyStatePio :: (GlobalState -> GlobalState) -> Pio ()
@@ -40,17 +42,48 @@ modifyStatePio update = Pio $ do
   st <- get
   put $ update st
 
-data GlobalState = GlobalState 
-  { globalInputState    :: InputState
-  , globalRndState      :: RndState
-  , globalDrawState     :: DrawState  
-  , globalFontState     :: FontState
-  , globalTimeState     :: TimeState
-  , globalFrameState    :: FrameState
+data GlobalState = GlobalState
+  { globalInputState    :: !InputState
+  , globalRndState      :: !RndState
+  , globalDrawState     :: !DrawState
+  , globalFontState     :: !FontState
+  , globalTimeState     :: !TimeState
+  , globalFrameState    :: !FrameState
+  , globalSphereDetail  :: !RawSphereRes
   }
 
+data RawSphereRes = RawSphereRes
+  { rawSphereRes'longitude :: !Int32
+  , rawSphereRes'latitude  :: !Int32
+  }
+
+-- | Sphere resolution
+data SphereRes = SphereRes
+  { sphereRes'longitude :: !Int
+  , sphereRes'latitude  :: !Int
+  }
+
+toRawSphereRes :: SphereRes -> RawSphereRes
+toRawSphereRes (SphereRes a b) = RawSphereRes (fromIntegral a) (fromIntegral b)
+
+instance Default SphereRes where
+  def = SphereRes 30 30
+
+instance Default RawSphereRes where
+  def = toRawSphereRes def
+-- | Hack to construct resolution from single number
+
+instance Num SphereRes where
+  fromInteger n = SphereRes (fromInteger n) (fromInteger n)
+  (+) = undefined
+  (*) = undefined
+  (-) = undefined
+  negate = undefined
+  abs = undefined
+  signum = undefined
+
 defGlobalState :: IO GlobalState
-defGlobalState = fmap (\timeSt -> GlobalState def def def def timeSt def) initTimeState
+defGlobalState = fmap (\timeSt -> GlobalState def def def def timeSt def def) initTimeState
 
 onInput :: State InputState a -> Pio a
 onInput = onState globalInputState (\x a -> x { globalInputState = a })

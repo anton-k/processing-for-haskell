@@ -1,6 +1,6 @@
 {-# Language FlexibleContexts #-}
 module Graphics.Proc.Core.Run(
-	Proc(..), runProc, Draw, Update, TimeInterval
+  Proc(..), runProc, Draw, Update, TimeInterval
 ) where
 
 import Control.Monad.IO.Class
@@ -9,8 +9,8 @@ import Data.Default
 import Data.IORef
 
 import qualified Graphics.Rendering.OpenGL as G
-import Graphics.Rendering.OpenGL
-import Graphics.UI.GLUT
+import qualified Graphics.UI.GLUT as G
+import Graphics.UI.GLUT (($=))
 
 import Graphics.Proc.Core.State
 import Graphics.Proc.Core.GLBridge
@@ -22,7 +22,7 @@ type Update s = s -> Pio s
 -- | An alias for processing procedures.
 type Draw = Pio ()
 
--- | It holds all processing standard callbacks. 
+-- | It holds all processing standard callbacks.
 -- With it we can set the setup, draw, and update functions.
 -- Here we can specify how to react on user-input.
 --
@@ -44,14 +44,14 @@ type Draw = Pio ()
 --
 -- There is a useful function procUpdateTime that provides a time interval that has passed since
 -- the previous update of the state. It can be useful for physics engines.
-data Proc s = Proc 
+data Proc s = Proc
     { procSetup :: Pio s
     , procUpdate :: Update s
-    , procUpdateTime :: TimeInterval -> Update s 
+    , procUpdateTime :: TimeInterval -> Update s
     , procDraw  :: s -> Draw
 
     -- mouse callbacks
-    , procMousePressed  :: Update s    
+    , procMousePressed  :: Update s
     , procMouseReleased :: Update s
     , procMouseClicked  :: Update s
     , procMouseDragged  :: Update s
@@ -68,7 +68,7 @@ instance Default (Proc s) where
         { procSetup = return $ error "No setup is defined. Please define the procSetup value."
         , procUpdate = return
         , procUpdateTime = const return
-        , procDraw = const (return ()) 
+        , procDraw = const (return ())
         -- mouse
         , procMousePressed  = return
         , procMouseReleased = return
@@ -92,7 +92,7 @@ initSt p = do
 
 updateSt :: IORef (St s) -> Update s -> IO ()
 updateSt ref f = do
-  st <- get ref
+  st <- G.get ref
   (user, global) <- runPio (f (stUser st)) (stGlobal st)
   ref $= St user global
 
@@ -107,42 +107,42 @@ runProc p = do
   ref <- newIORef =<< initSt p
 
   nextFrame ref
-  displayCallback       $= display ref  
-  keyboardMouseCallback $= Just (keyMouse ref)
-  motionCallback        $= Just (mouseMotion ref)
-  passiveMotionCallback $= Just (passiveMouseMotion ref)
+  G.displayCallback       $= display ref
+  G.keyboardMouseCallback $= Just (keyMouse ref)
+  G.motionCallback        $= Just (mouseMotion ref)
+  G.passiveMotionCallback $= Just (passiveMouseMotion ref)
 
-  mainLoop
-  where   
-    display ref = updateSt ref $ \s -> do      
-      liftIO $ loadIdentity
-      procDraw p s      
-      liftIO $ swapBuffers
+  G.mainLoop
+  where
+    display ref = updateSt ref $ \s -> do
+      liftIO $ G.loadIdentity
+      procDraw p s
+      liftIO $ G.swapBuffers
       updateFrameCount
       return s
 
-    idle ref = do 
+    idle ref = do
       loopInfo <- getLoopInfo ref
       case loopInfo of
-        Loop   -> updateLoopState ref      
+        Loop   -> updateLoopState ref
         NoLoop -> return ()
         Redraw -> updateLoopState ref >> passSt ref (putLoopMode NoLoop)
       nextFrame ref
 
-    updateLoopState ref =  updateSt ref $ \s -> do      
+    updateLoopState ref =  updateSt ref $ \s -> do
         s1 <- procUpdate p s
         dt <- getDuration
         s2 <- procUpdateTime p dt s1
-        liftIO $ postRedisplay Nothing
+        liftIO $ G.postRedisplay Nothing
         return s2
 
     nextFrame ref = do
       timeOut <- getTimeoutInterval ref
-      addTimerCallback timeOut (idle ref)
+      G.addTimerCallback timeOut (idle ref)
 
     keyMouse ref key keyState modifiers pos = updateSt ref $ \s -> do
       putPosition pos
-      case keyState of 
+      case keyState of
         Down -> do
           case key of
             MouseButton mb -> do
@@ -151,13 +151,13 @@ runProc p = do
             keyPress -> do
               putKeyPress keyPress
               procKeyPressed p s
-        Up   -> 
+        Up   ->
           case key of
             Char ch -> procKeyReleased p s
             SpecialKey sk -> return s
             MouseButton mb -> do
               putMouseButton Nothing
-              procMouseReleased p s     
+              procMouseReleased p s
 
     mouseMotion ref pos = passSt ref $ putPosition pos
     passiveMouseMotion ref pos = passSt ref $ putPosition pos
@@ -168,6 +168,6 @@ getTimeoutInterval ref = readRef getter ref
 getLoopInfo ref = readRef getLoopMode ref
 
 readRef getter ref = do
-  st <- fmap stGlobal $ get ref
+  st <- fmap stGlobal $ G.get ref
   fmap fst $ runPio getter st
 

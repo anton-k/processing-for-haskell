@@ -1,13 +1,13 @@
 module Graphics.Proc.Core.State.Elements.Input(
-    InputState(..), MouseButton(..), Modifiers(..), Key(..), KeyState(..)   
+    InputState(..), MouseButton(..), Modifiers(..), Key(..), KeyState(..)
 ) where
 
-import Data.Default 
-import Control.Monad.Trans.State.Strict
+import Data.Default
+import Control.Monad.State.Strict
 
 import Graphics.Proc.Core.GLBridge
 
-data InputState = InputState 
+data InputState = InputState
   { lastPressedKey   :: Key
   , pressedModifiers :: Modifiers
   , mousePosition    :: (Int, Int)
@@ -18,9 +18,9 @@ instance Default Modifiers where
   def = Modifiers Up Up Up
 
 instance Default InputState where
-  def  = InputState 
+  def  = InputState
     { lastPressedKey = Char ' '
-    , pressedModifiers = def 
+    , pressedModifiers = def
     , mousePosition   = (0, 0)
     , pressedButton   = Nothing
     }

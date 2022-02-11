@@ -3,16 +3,16 @@ module Graphics.Proc.Core.State.Elements.Time(
 ) where
 
 import Data.Time.Clock
-import Control.Monad.Trans.State.Strict
+import Control.Monad.State.Strict
 
 -- | Time duration in seconds.
 type TimeInterval = Float
 
-data TimeState = TimeState 
+data TimeState = TimeState
   { timeLast      :: UTCTime
   , timeStart     :: UTCTime }
 
-initTimeState = fmap (\x -> TimeState x x) getCurrentTime   
+initTimeState = fmap (\x -> TimeState x x) getCurrentTime
 
 ------------------------------------------
 

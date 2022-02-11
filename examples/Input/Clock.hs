@@ -1,20 +1,20 @@
 -- original code: https://processing.org/examples/clock.html
 
 -- Clock.
--- 
--- The current time can be read with the second(), minute(), and hour() 
--- functions. In this example, sin() and cos() values are used to set the 
+--
+-- The current time can be read with the second(), minute(), and hour()
+-- functions. In this example, sin() and cos() values are used to set the
 -- position of the hands.
 
 import Graphics.Proc hiding (scale)
 
 main = runProc $ def { procSetup = setup, procDraw = draw }
- 
+
 width  = 640
 height = 360
 
 setup = do
-  size (width, height)
+  size (P2 width height)
   noStroke
 
 radius = min width height / 2
@@ -23,7 +23,7 @@ minutesRadius = radius * 0.60
 hoursRadius = radius * 0.50
 clockDiameter = radius * 1.8
 
-center = 0.5 *^ (width, height)
+center = 0.5 *^ (P2 width height)
 
 draw () = do
   background (grey 0)
@@ -31,10 +31,10 @@ draw () = do
   drawHands
   drawTicks
 
-drawClockBackground = do 
+drawClockBackground = do
   fill (grey 80)
   noStroke
-  ellipse center (clockDiameter, clockDiameter)
+  ellipse center (P2 clockDiameter clockDiameter)
 
 drawTicks = do
   fill (grey 255)
@@ -43,7 +43,7 @@ drawTicks = do
 drawHands = do
   drawHour
   drawSecond
-  drawMinute  
+  drawMinute
 
 drawHour   = drawHand hoursRadius hour 12 5
 drawMinute = drawHand minutesRadius minute 60 3

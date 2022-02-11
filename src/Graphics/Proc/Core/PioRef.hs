@@ -1,5 +1,5 @@
 module Graphics.Proc.Core.PioRef(
-	PioRef, newPioRef, readPioRef, writePioRef, modifyPioRef
+  PioRef, newPioRef, readPioRef, writePioRef, modifyPioRef
 ) where
 
 import Data.IORef
@@ -12,7 +12,7 @@ import Graphics.Proc.Core.State
 -- and then manipulate the value with functions @readPioRef@ and @writePioRef@.
 -- The API is the same as in the case of @IORef@s. It's standard way to work with mutables in haskell.
 newtype PioRef a = PioRef { unPioRef :: IORef a }
-	deriving (Eq)
+  deriving (Eq)
 
 -- | Creates a reference for a mutable value. The argument is an initial value assigned to the variable.
 newPioRef :: a -> Pio (PioRef a)

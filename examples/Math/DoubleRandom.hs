@@ -6,7 +6,7 @@
 import Graphics.Proc
 
 main = runProc $ def { procSetup = setup, procDraw = draw }
- 
+
 width  = 640
 height = 360
 
@@ -15,18 +15,18 @@ steps = totalPts + 1
 dx = width / steps
 
 setup = do
-  size (width, height)
+  size (P2 width height)
   stroke (grey 255)
   frameRate 1
-  randRef <- newPioRef 0  
+  randRef <- newPioRef 0
   return randRef
-  
+
 draw randRef = do
-	background (grey 0)
-	writePioRef randRef 0
-	forM_ [0 .. steps ] $ \i -> do
-		rand <- readPioRef randRef
-		r1 <- random2 (-rand, rand)
-		point (dx * i, height / 2 + r1)
-		r2 <- random2 (-5, 5)
-		modifyPioRef randRef (+ r2)
+  background (grey 0)
+  writePioRef randRef 0
+  forM_ [0 .. steps ] $ \i -> do
+    rand <- readPioRef randRef
+    r1 <- random2 (-rand, rand)
+    point (P2 (dx * i) (height / 2 + r1))
+    r2 <- random2 (-5, 5)
+    modifyPioRef randRef (+ r2)

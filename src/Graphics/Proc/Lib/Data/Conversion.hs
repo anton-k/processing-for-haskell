@@ -1,11 +1,11 @@
 module Graphics.Proc.Lib.Data.Conversion(
-	float, int
+  int, float
 ) where
 
--- | Converts ints to floats.
+-- | Converts ints to doubles.
 float :: Int -> Float
 float = fromIntegral
 
--- | Converts floats to ints.
-int :: Float -> Int 
+-- | Converts doubles to ints.
+int :: Float -> Int
 int = floor

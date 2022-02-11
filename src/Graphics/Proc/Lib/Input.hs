@@ -1,9 +1,7 @@
 module Graphics.Proc.Lib.Input(
-	module Graphics.Proc.Lib.Input.Mouse,
-	module Graphics.Proc.Lib.Input.Keyboard,
-	module Graphics.Proc.Lib.Input.Time
+  module X
 ) where
 
-import Graphics.Proc.Lib.Input.Mouse
-import Graphics.Proc.Lib.Input.Keyboard
-import Graphics.Proc.Lib.Input.Time
+import Graphics.Proc.Lib.Input.Mouse      as X
+import Graphics.Proc.Lib.Input.Keyboard   as X
+import Graphics.Proc.Lib.Input.Time       as X

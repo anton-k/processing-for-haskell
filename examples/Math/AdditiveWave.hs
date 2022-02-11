@@ -1,11 +1,11 @@
 -- originaal code: https://processing.org/examples/additivewave.html
 
 -- Additive Wave by Daniel Shiffman.
--- 
+--
 -- Create a more complex wave by adding two waves together.
 import Data.List
 
-import Graphics.Proc 
+import Graphics.Proc
 
 main = runProc $ def { procSetup = setup, procDraw = draw, procUpdate = update }
 
@@ -23,7 +23,7 @@ theta = 0.0
 --  dxs         -- Value for incrementing X, to be calculated as a function of period and xspacing
 
 setup = do
-  size (width, height)
+  size (P2 width height)
   frameRate 30
   -- colorMode(RGB, 255, 255, 255, 100)
   (amplitudes, periods) <- fmap unzip $ forM [0 .. maxwaves] $ \i -> do
@@ -34,7 +34,7 @@ setup = do
   return (theta, amplitudes, dxs)
   where theta = 0
 
-draw (theta, amplitudes, dxs) = do 
+draw (theta, amplitudes, dxs) = do
   background (grey 0)
   renderWave (calcWave theta amplitudes dxs)
 
@@ -42,12 +42,12 @@ draw (theta, amplitudes, dxs) = do
 update (theta, amplitudes, dxs) =
   return (theta + 0.012, amplitudes, dxs)
 
-calcWave theta amplitudes dxs = 
+calcWave theta amplitudes dxs =
   fmap sum $ transpose $ zipWith3 (wave1 theta) amplitudes dxs [0 .. maxwaves]
 
 wave1 theta amplitude dx n = take npoints $ fmap (\x -> dx + amplitude * func (x + theta)) [0, dx .. ]
-  where 
-    func 
+  where
+    func
       | n `mod` 2 == 0 = sin
       | otherwise      = cos
 
@@ -58,4 +58,4 @@ renderWave ys = do
   fill (greya 255 78)
   ellipseMode Center
   forM_ (zip [0 .. npoints] ys) $ \(x, y) -> do
-    ellipse (float x * xspacing, height/2+y) 16
+    ellipse (P2 (float x * xspacing) (height/2+y)) 16

@@ -193,13 +193,14 @@ state manipulation but we are going to do it going functional way.
 Our `setup` function is going to produce initial state value:
 
 ~~~Haskell
-setup :: Pio Float
+setup :: Pio Double
 setup = do
-	size (width, height)
+	size (P2 width height)
 	return 0
 ~~~
 
 With the first command (`size`) we set the sizes of the windows.
+The `P2` constructs 2D point. Also we have P3 when we need to use one more dimension.
 With second command we return the value of our state. Later we are going
 to pass it as an argument to `draw` function. Notice the type signature of the function.
 The value is wrapped in `Pio`. The `Pio` is short for Processing IO-monad. 
@@ -213,7 +214,7 @@ wrapped in special case of IO-monad.
 Let's draw everything:
 
 ~~~Haskell
-draw :: Float -> Draw
+draw :: Double -> Draw
 draw t = do
 	background (grey 255)
 	drawSun
@@ -241,12 +242,12 @@ Let's draw the sun and the planet:
 ~~~Haskell
 drawSun = do
 	fill (grey 0)
-	ellipse (centerX, centerY) (30, 30)
+	ellipse (P2 centerX centerY) (P2 30 30)
 ~~~
 
 The Sun is static so we don't need any input.
 Notice the difference of `ellipse` function. In Haskell I've decided to
-express arguments of all 2D functions with points or pairs of floats. The Processing always uses a plain float values.
+express arguments of all 2D functions with points or pairs of doubles (type `P2`). The Processing always uses a plain float values.
 It's ok for introduction but I often find that the point type is much more convenient. 
 
 Let's draw a planet:
@@ -254,7 +255,7 @@ Let's draw a planet:
 ~~~Haskell
 drawPlanet t = do
 	fill (grey 145)
-	ellipse (x, y) (12, 12)
+	ellipse (P2 x y) (P2 12 12)
 	where
 		x = centerX + rad * cos t
 		y = centerY + rad * sin t
@@ -267,30 +268,30 @@ The cool thing about using points in place of numbers is that in Haskell we have
 numeric  instances for points. We can rewrite the code like this:
 
 ~~~Haskell
-winSizes = (300, 300)
+winSizes = (P2 300 300)
 center   = 0.5 *^ winSizes
 
 drawPlanet t = do
 	fill (grey 145)
 	ellipse p 12
 	where
-		p = center + rad *^ (cos t, sin t)
+		p = center + rad *^ (P2 (cos t) (sin t))
 ~~~
 
 The operator `*^` multiplies both values o the pair with the given value.
-So it multiplies a float value by point or scales the point with the value.
+So it multiplies a double value by point or scales the point with the value.
 The `+` and numeric literals are *overloaded* for points. We can sum them up
-and a numeric value `12` produces a pair of `(12, 12)`. So the formula becomes
+and a numeric value `12` produces a pair of `(P2 12 12)`. So the formula becomes
 a single line definition:
 
 ~~~Haskell
-p = center + rad *^ (cos t, sin t)
+p = center + rad *^ (P2 (cos t) (sin t))
 ~~~
 
 We are ready to update the state:
 
 ~~~Haskell
-update :: Float -> Pio Float
+update :: Double -> Pio Double
 update t = return (t + 0.025)
 ~~~
 
@@ -348,23 +349,23 @@ main = runProc $ def
 -- constants
 
 rad = 55
-sizes  = (300, 300)
+sizes  = (P2 300 300)
 center = 0.5 *^ sizes
 
 -- standard functions
 
-setup :: Pio Float
+setup :: Pio Double
 setup = do
 	size sizes
 	return 0
 
-draw :: Float -> Draw
+draw :: Double -> Draw
 draw t = do
 	background (grey 255)
 	drawSun
 	drawPlanet t
 
-update :: Float -> Pio Float
+update :: Double -> Pio Double
 update t = return (t + 0.0025)
 
 -- drawing
@@ -377,7 +378,7 @@ drawPlanet t = do
 	fill (grey 145)
 	ellipse p 12
 	where	
-		p = center + rad *^ (cos t, sin t)	
+		p = center + rad *^ (P2 (cos t) (sin t)	)
 ~~~
 You can save the file and run it with runhaskell utility.
 
@@ -428,8 +429,8 @@ Let's briefly recall all of them:
 	But in Haskell two points is enough:
 
 	~~~Haskell
-	let p1 = (x1, y1)
-	    p2 = (x2, y2)
+	let p1 = P2 x1 y1
+	    p2 = P2 x2 y2
 	line p1 p2
 	~~~
 
@@ -440,10 +441,10 @@ Let's briefly recall all of them:
 * We use special functions to construct colors:
 
 	~~~Haskell
-	grey  :: Float -> Col
-	greya :: Float -> Float -> Col
-	rgb   :: Float -> Float -> Float -> Col
-	rgba  :: Float -> Float -> Float -> Float -> Col
+	grey  :: Double -> Col
+	greya :: Double -> Double -> Col
+	rgb   :: Double -> Double -> Double -> Col
+	rgba  :: Double -> Double -> Double -> Double -> Col
 
 	fill   		:: Col -> Draw
 	stroke 		:: Col -> Draw

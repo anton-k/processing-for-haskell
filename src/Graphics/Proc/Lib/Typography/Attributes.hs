@@ -1,5 +1,5 @@
 module Graphics.Proc.Lib.Typography.Attributes(
---	textSize
+--  textSize
 ) where
 
 {-

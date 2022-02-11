@@ -1,16 +1,16 @@
 module Graphics.Proc.Core(
 
-	module Graphics.Proc.Core.State,
-	module Graphics.Proc.Core.PioRef,
-	module Graphics.Proc.Core.Run,
-	module Graphics.Proc.Core.Vector,
-	module Graphics.Proc.Core.GLBridge,
+  module Graphics.Proc.Core.State,
+  module Graphics.Proc.Core.PioRef,
+  module Graphics.Proc.Core.Run,
+  module Graphics.Proc.Core.Vector,
+  module Graphics.Proc.Core.GLBridge,
 
-	-- | Common reexports
-	module Data.Default,
-	module Control.Monad,
-	module Control.Applicative,
-	module Control.Monad.IO.Class
+  -- | Common reexports
+  module Data.Default,
+  module Control.Monad,
+  module Control.Applicative,
+  module Control.Monad.IO.Class
 
 ) where
 
