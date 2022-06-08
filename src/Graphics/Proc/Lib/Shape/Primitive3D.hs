@@ -36,7 +36,7 @@ box (P3 h w d) = do
   rib (-h2) w2
   rib h2 w2
   where
-    sq z = linePath [P3 (-h2) (-w2) z, P3 (-h2) w2 z, P3 h2 w2 z, P3 h2 (-w2) z]
+    sq z = linePath [P3 (-h2) (-w2) z, P3 (-h2) w2 z, P3 h2 w2 z, P3 h2 (-w2) z, P3 (-h2) (-w2) z]
     rib x y = line (P3 x y d2) (P3 x y (-d2))
 
     h2 = 0.5 * h

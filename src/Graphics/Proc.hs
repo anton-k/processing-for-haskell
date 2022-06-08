@@ -103,7 +103,7 @@ module Graphics.Proc(
   -- * Lights
 
   -- * Camera
-  camera, camera2,
+  camera, camera2, ortho, frustrum, perspective,
 
   -- ** Coordinates
 

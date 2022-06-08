@@ -41,7 +41,7 @@ setupWindow = do
   blendFunc $= (SrcAlpha, OneMinusSrcAlpha)
   glSize (P2 100 100)
   clearColor $= Color4 1 1 1 1
-  G.clear [ColorBuffer]
+  G.clear [ColorBuffer, DepthBuffer]
 
 glSize :: P2 -> IO ()
 glSize p@(P2 w h) = do
