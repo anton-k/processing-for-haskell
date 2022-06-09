@@ -57,7 +57,7 @@ module Graphics.Proc(
   bezier,
 
   -- ** 3D Primitives
-  SphereRes(..), sphereDetail, sphere, box,
+  SphereRes(..), sphereDetail, sphere, box, tetrahedron, cube, octahedron, dodecahedron, icosahedron,
 
   -- ** Attributes
   EllipseMode, RectMode, DrawMode(..), ellipseMode, rectMode,

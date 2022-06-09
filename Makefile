@@ -2,5 +2,5 @@ build:
 	stack build
 
 run:
-	stack exec -- runhaskell examples/Form/Box.hs	
+	stack exec -- runhaskell examples/Form/PlatonicShapes.hs	
 
