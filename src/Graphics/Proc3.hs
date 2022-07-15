@@ -1,30 +1,13 @@
 -- | Imperative EDSL for graphics and animation. The libary implements a Processing in Haskell.
--- Two dimensional version of the library.
+-- Three dimensional version of the library.
 --
--- An example:
---
--- > import Graphics.Proc
--- >
--- > main = runProc $ def { procSetup = setup, procDraw = draw, procUpdate = update }
--- >
--- > setup = do
--- >  size (P2 300 300)
--- >  return 0
--- >
--- > draw x = do
--- >  background (grey 255)
--- >  fill (rgb 0 255 0)
--- >  circle 20 (P2 (150 + 50 * sin x) 150)
--- >
--- > update x = return (x + 0.1)
--- >
 -- We can find the quickstart guide and lots of examples in the project repository on github <https://github.com/anton-k/processing-for-haskell> (see the directory @examples@).
-module Graphics.Proc(
+module Graphics.Proc3(
   -- * Structure
   Proc(..), runProc,
 
   -- * Types
-  Pio, Draw, Update, TimeInterval, Col(..), P2(..),
+  Pio, Draw, Update, TimeInterval, Col(..), P2(..), P3(..), IsPoint(..),
 
   -- * Environment
   winSize, winWidth, winHeight,
@@ -52,16 +35,13 @@ module Graphics.Proc(
 
   -- ** 2D Primitives
 
-  triangle, rect, quad, ellipse, circle, line, linePath, point, pointPath, polygon,
+  triangle, quad, line, linePath, point, pointPath, polygon,
 
-  -- ** Curves
-  bezier,
+  -- ** 3D Primitives
+  SphereRes(..), sphereDetail, sphere, box, tetrahedron, cube, octahedron, dodecahedron, icosahedron,
 
   -- ** Attributes
-  EllipseMode, RectMode, DrawMode(..), ellipseMode, rectMode,
-  strokeWeight,
-
-  -- ** Vertex
+  DrawMode(..), strokeWeight,
 
   -- ** Loading & Displaying
 
@@ -76,8 +56,6 @@ module Graphics.Proc(
   -- ** Keyboard
   Key(..), SpecialKey(..), key, Modifiers(..), modifiers,
 
-  -- ** Files
-
   -- ** Time & Date
   year, month, day, hour, minute, second, millis, utcHour,
 
@@ -86,21 +64,14 @@ module Graphics.Proc(
   -- ** Text Area
   println,
 
-  -- ** Image
-
-  -- ** Files
-
   -- * Transform
   translate,
-  rotate,
+  rotateX, rotateY, rotateZ,
   scale,
   resetMatrix, local,
-  applyMatrix,
-  shearX, shearY,
 
-  -- ** Coordinates
-
-    -- ** Material Properties
+  -- * Camera
+  camera, camera2, ortho, frustrum, perspective,
 
   -- * Color
   fill, noFill, stroke, noStroke, strokeFill,
@@ -111,28 +82,6 @@ module Graphics.Proc(
   white, black, navy, blue, aqua, teal, olive, green,
   lime, yellow, orange, red, maroon, fushsia, purple,
   gray, silver,
-
-  -- Image
-
-  --  Loading & Displaying
-
-  -- Textures
-
-  -- Pixels
-
-  -- Rendering
-
-  --  Shaders
-
-  -- Typography
-
-  -- Loading & Displaying
-  -- Font, loadFont, text, textFont,
-
-  -- Attributes
-  -- textSize,
-
-  -- Metrics
 
   -- ** Calculation
   remap, FloatInterval,
@@ -181,5 +130,5 @@ import Data.AffineSpace
 import Data.Cross
 
 import Graphics.Proc.Core
-import Graphics.Proc.Lib
+import Graphics.Proc.Lib3
 

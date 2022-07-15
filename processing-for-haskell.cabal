@@ -65,6 +65,7 @@ library
   -- Modules exported by the library.
   exposed-modules:
     Graphics.Proc
+    Graphics.Proc3
 
   -- Modules included in this library but not exported.
   other-modules:
@@ -74,6 +75,7 @@ library
     Graphics.Proc.Core.Run
     Graphics.Proc.Core.GLBridge
     Graphics.Proc.Core.Vector
+    Graphics.Proc.Core.Vector.Primitive2D
 
     Graphics.Proc.Core.State
     Graphics.Proc.Core.State.Pio
@@ -92,11 +94,8 @@ library
     Graphics.Proc.Lib.Data
     Graphics.Proc.Lib.Data.Conversion
 
-    Graphics.Proc.Lib.Control
-
     Graphics.Proc.Lib.Shape
     Graphics.Proc.Lib.Shape.Primitive2D
-    Graphics.Proc.Lib.Shape.Primitive3D
     Graphics.Proc.Lib.Shape.Curve
     Graphics.Proc.Lib.Shape.Attribute
 
@@ -109,10 +108,6 @@ library
     Graphics.Proc.Lib.Output.TextArea
 
     Graphics.Proc.Lib.Transform
-
-    Graphics.Proc.Lib.Lights
-
-    Graphics.Proc.Lib.Camera
 
     Graphics.Proc.Lib.Color
 
@@ -129,6 +124,13 @@ library
     Graphics.Proc.Lib.Math.Random
 
     Graphics.Proc.Lib.Misc
+
+    Graphics.Proc.Lib3
+    Graphics.Proc.Lib3.Shape.Primitive2D
+    Graphics.Proc.Lib3.Shape.Primitive3D
+    Graphics.Proc.Lib3.Camera
+    Graphics.Proc.Lib3.Lights
+    Graphics.Proc.Lib3.Transform
 
   -- LANGUAGE extensions used by modules in this package.
   other-extensions: DeriveFunctor, GeneralizedNewtypeDeriving

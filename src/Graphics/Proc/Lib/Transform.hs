@@ -1,6 +1,6 @@
 module Graphics.Proc.Lib.Transform(
   translate,
-  rotate, rotateX, rotateY, rotateZ,
+  rotate,
   scale,
   resetMatrix,
   local,
@@ -18,30 +18,14 @@ import Graphics.Proc.Core
 -- | Specifies an amount to displace objects within the display window. The x parameter specifies left/right translation, the y parameter specifies up/down translation
 --
 -- processing docs: <https://processing.org/reference/translate_.html>
-translate :: IsPoint p => p -> Draw
+translate :: P2 -> Draw
 translate p = liftIO $ G.translate $ toVector (toP3 p)
-
--- | Rotates around given 3D vector.
-rotateBy :: Vector3 GLfloat -> Float -> Draw
-rotateBy v x = liftIO $ G.rotate (x * 360) v
 
 -- | Rotates the amount specified by the angle parameter. Angles must be specified in taus (values from 0 to 1)
 --
 -- processing docs: <https://processing.org/reference/rotate_.html>
 rotate :: Float -> Draw
-rotate = rotateZ
-
--- | Rotates around X-axis.
-rotateX :: Float -> Draw
-rotateX = rotateBy $ Vector3 (1 :: GLfloat) 0 0
-
--- | Rotates around Y-axis.
-rotateY :: Float -> Draw
-rotateY = rotateBy $ Vector3 0 (1 :: GLfloat) 0
-
--- | Rotates around Z-axis.
-rotateZ :: Float -> Draw
-rotateZ = rotateBy $ Vector3 0 0 (1 :: GLfloat)
+rotate x = liftIO $ G.rotate (x * 360) (Vector3 0 0 (1 :: GLfloat))
 
 -- | Increases or decreases the size of a shape by expanding and contracting vertices. Objects always scale from their relative origin to the coordinate system. Scale values are specified as decimal percentages. For example, the function call scale(2.0) increases the dimension of a shape by 200%.
 --
@@ -69,7 +53,8 @@ local (Pio a) = Pio $ StateT $ \s -> do
     preservingMatrix $ do
         runStateT a s
 
--- | Multiplies the current matrix by the one specified through the parameters. This is very slow because it will try to calculate the inverse of the transform, so avoid it whenever possible. The equivalent function in OpenGL is glMultMatrix().
+-- | Multiplies the current matrix by the one specified through the parameters.
+-- This is very slow because it will try to calculate the inverse of the transform, so avoid it whenever possible. The equivalent function in OpenGL is glMultMatrix().
 --
 -- processing docs: <https://processing.org/reference/applyMatrix_.html>
 applyMatrix :: [Float] -> Draw

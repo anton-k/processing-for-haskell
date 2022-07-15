@@ -1,4 +1,4 @@
-module Graphics.Proc.Lib.Shape.Primitive3D(
+module Graphics.Proc.Lib3.Shape.Primitive3D(
   SphereRes(..),
   sphereDetail,
   sphere,
@@ -11,7 +11,7 @@ module Graphics.Proc.Lib.Shape.Primitive3D(
 ) where
 
 import Graphics.Proc.Core
-import Graphics.Proc.Lib.Shape.Primitive2D (linePath, line)
+import Graphics.Proc.Lib3.Shape.Primitive2D (linePath, line)
 import qualified Graphics.Rendering.OpenGL.GLU.Quadrics as G
 
 -- | Controls the detail used to render a sphere by adjusting the number of vertices of the sphere mesh.

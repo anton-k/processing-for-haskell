@@ -1,6 +1,10 @@
-import Graphics.Proc
+import Graphics.Proc3
 
-main = runProc $ def { procSetup = setup, procDraw = draw, procUpdate = update }
+main = runProc $ def
+  { procSetup = setup
+  , procDraw = draw
+  , procUpdate = update
+  }
 
 setup = do
   size (P2 800 630)
@@ -22,15 +26,14 @@ draw = drawBy 2
         [10, 22, 45, 70, 120]
   )
 
-
 drawBy speed params t = do
   background white
   let fov = pi / 15
-      cameraZ = 600 / tan (fov / 2)
+      cameraZ = 500 / tan (fov / 2)
   camera (P3 0 0 0) (P3 0 0 (negate cameraZ)) (P3 0 1 0)
   perspective fov 1 (cameraZ / 10) (cameraZ * 400)
   translate (P3 150 150 (negate 300))
-  scale (P2 1.2 1.2)
+  scale 1.2
   strokeWeight 2
   zipWithM_ go (cycle [rotateX, rotateY, rotateZ, rotateX . negate, rotateY . negate, rotateZ . negate]) params
   where

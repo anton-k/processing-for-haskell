@@ -121,5 +121,3 @@ instance InnerSpace P2 where
 instance InnerSpace P3 where
   (<.>) (P3 x1 y1 z1) (P3 x2 y2 z2) = x1 * x2 + y1 * y2 + z1 * z2
 
-
-

@@ -6,12 +6,13 @@ module Graphics.Proc.Lib.Shape.Primitive2D(
 
 import Graphics.Proc.Core
 import Graphics.Rendering.OpenGL hiding (get, rect)
+import qualified Graphics.Proc.Core.Vector.Primitive2D as Core
 
 -- | A triangle is a plane created by connecting three points.
 --
 -- processing docs: <https://processing.org/reference/triangle_.html>
-triangle :: IsPoint p => p -> p -> p -> Draw
-triangle p1 p2 p3 = drawProcP3 Triangles LineLoop [p1, p2, p3]
+triangle :: P2 -> P2 -> P2 -> Draw
+triangle = Core.triangle
 
 -- | Draws a rectangle to the screen. A rectangle is a four-sided shape
 -- with every angle at ninety degrees. By default, the first two parameters
@@ -50,26 +51,22 @@ modeRectPoints mode (P2 a b) (P2 c d) = case mode of
 -- proceed clockwise or counter-clockwise around the defined shape.
 --
 -- processing docs: <https://processing.org/reference/quad_.html>
-quad :: IsPoint p => p -> p -> p -> p -> Draw
-quad p1 p2 p3 p4 = drawProcP3 Polygon LineLoop [p1, p2, p3, p4]
+quad :: P2 -> P2 -> P2 -> P2 -> Draw
+quad = Core.quad
 
 -- | Draws a polygon.
-polygon :: IsPoint p => [p] -> Draw
-polygon ps = drawProcP3 Polygon LineLoop ps
+polygon :: [P2] -> Draw
+polygon = Core.polygon
 
 -- | Draws a point, a coordinate in space at the dimension of one pixel.
 --
 -- processing docs: <https://processing.org/reference/point_.html>
-point :: IsPoint p => p -> Draw
-point p = do
-  setStrokeColor
-  drawP3 Points [p]
+point :: P2 -> Draw
+point = Core.point
 
 -- | Draws a sequence of points.
-pointPath :: IsPoint p => [p] -> Draw
-pointPath ps = do
-  setStrokeColor
-  drawP3 Points ps
+pointPath :: [P2] -> Draw
+pointPath = Core.pointPath
 
 setStrokeColor :: Pio ()
 setStrokeColor = setCol . maybe black id =<< getStroke
@@ -79,16 +76,12 @@ black = Col 0 0 0 1
 -- | Draws a line (a direct path between two points) to the screen.
 --
 -- processing docs: <https://processing.org/reference/line_.html>
-line :: IsPoint p => p -> p -> Draw
-line p1 p2 = do
-  setStrokeColor
-  drawP3 Lines [p1, p2]
+line :: P2 -> P2 -> Draw
+line = Core.line
 
 -- | Draws a line-path (sequence of line segments).
-linePath :: IsPoint p => [p] -> Draw
-linePath ps = do
-  setStrokeColor
-  drawP3 LineStrip ps
+linePath :: [P2] -> Draw
+linePath = Core.linePath
 
 -- | Draws an ellipse (oval) to the screen. An ellipse with equal
 -- width and height is a circle. By default, the first two parameters

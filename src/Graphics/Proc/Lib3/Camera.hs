@@ -1,4 +1,4 @@
-module Graphics.Proc.Lib.Camera(
+module Graphics.Proc.Lib3.Camera(
   camera,
   camera2,
   ortho,
@@ -12,7 +12,7 @@ import qualified Graphics.Rendering.OpenGL as G
 import Graphics.Proc.Core
 
 -- | Define a viewing transformation
-
+--
 -- > camera eye center up
 --
 -- @camera@ creates a viewing matrix derived from an eye point,
@@ -20,6 +20,28 @@ import Graphics.Proc.Core
 camera :: P3 -> P3 -> P3 -> Pio ()
 camera eye center up =
   liftIO $ G.lookAt (toVertex eye) (toVertex center) (toVector up)
+
+{-
+-- | Camera on spheric coordinates.
+--
+-- > cameraSphere distance (P2 rotateX rotateY rotateZ)
+--
+-- The eye is placed on the sphere with parameters: (distance, rotateX, rotateY).
+-- It looks at the center of the sphere. rotateZ - is rotation in the plane that is orthogonal to sphere.
+-- Rotations are measured in @tau@ (the fraction of the full circle)
+cameraSphere :: Float -> P3 -> Pio ()
+cameraSphere distance (P3 rotateX rotateY rotateZ) =
+  where
+    center = P3 0 0 0
+    eye    = P3 eyeX eyeY eyeZ
+
+    eyeX = distance * cos rotX * sin rotY
+    eyeY = distance * sin rotX * sin rotY
+    eyeZ = distance * cos rotY
+
+    rotX = 2 * pi * rotateX
+    rotY = 2 * pi * rotateY
+-}
 
 -- | 2D camera view. It defines the center point, distance (affects scaling) and rotation
 --
