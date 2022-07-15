@@ -112,34 +112,27 @@ module Graphics.Proc(
   lime, yellow, orange, red, maroon, fushsia, purple,
   gray, silver,
 
+  -- Image
 
-  -- * Image
+  --  Loading & Displaying
 
-  -- ** Loading & Displaying
+  -- Textures
 
-  -- ** Textures
+  -- Pixels
 
-  -- ** Pixels
+  -- Rendering
 
-  -- ** Rendering
+  --  Shaders
 
-  -- ** Shaders
+  -- Typography
 
-  -- * Typography
-
-  -- ** Loading & Displaying
+  -- Loading & Displaying
   -- Font, loadFont, text, textFont,
 
-  -- ** Attributes
+  -- Attributes
   -- textSize,
 
-  -- ** Metrics
-
-  -- * Math
-
-  -- ** Operators
-
-  -- ** Bitwise Operators
+  -- Metrics
 
   -- ** Calculation
   remap, FloatInterval,
