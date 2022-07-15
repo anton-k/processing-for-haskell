@@ -1,4 +1,4 @@
-module Graphics.Proc.Lib.Camera(
+module Graphics.Proc.Lib3.Camera(
   camera,
   camera2,
   ortho,
